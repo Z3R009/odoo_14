@@ -1,0 +1,106 @@
+<odoo>
+    <!-- Billing Tree View -->
+    <record id="view_water_billing_tree" model="ir.ui.view">
+        <field name="name">water.billing.tree</field>
+        <field name="model">water.billing</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="transaction_id" />
+                <field name="member_id" string="Customer Name" />
+                <field name="billing_date" />
+                <field name="amount" />
+                <field name="paid" />
+                <header>
+                    <button name="action_generate_report"
+                        string="Generate Report"
+                        type="object"
+                        class="btn-primary" />
+                </header>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Billing Form View -->
+    <record id="view_water_billing_form" model="ir.ui.view">
+        <field name="name">water.billing.form</field>
+        <field name="model">water.billing</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!-- <header>
+                        <button string="Pay" type="object" name="action_pay" class="btn-primary"
+                            attrs="{'invisible':[('paid','=',True)]}" />
+                    </header> -->
+                    <group>
+                        <field name="transaction_id"
+                            style="font-size:20px; font-weight:bold; color: #black;"></field>
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="member_id" string="Customer Name" />
+                            <field name="billing_date" />
+                            <field name="usage" />
+                        </group>
+
+                        <group>
+                            <field name="previous_reading" readonly="1" />
+                            <field name="current_reading" readonly="1" />
+                            <!-- <field name="payment_amount" />
+                            <field name="paid" /> -->
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="amount"
+                            style="font-size:20px; font-weight:bold; color: #black;" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_water_billing" model="ir.actions.act_window">
+        <field name="name">Billing Records</field>
+        <field name="res_model">water.billing</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_water_billing_history" model="ir.actions.act_window">
+        <field name="name">Billing History (Paid)</field>
+        <field name="res_model">water.billing</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('paid','=',True)]</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_water_billing_root" name="Water Billing" />
+
+    <!-- First-level submenu -->
+    <menuitem id="menu_water_billing" parent="menu_water_billing_root" name="Billing" />
+
+    <!-- Second-level submenus -->
+    <menuitem id="menu_water_billing_records" parent="menu_water_billing"
+        name="Billing Records" action="action_water_billing" />
+    <menuitem id="menu_water_billing_history" parent="menu_water_billing"
+        name="Billing History (Paid)" action="action_water_billing_history" />
+
+
+    <!-- Action -->
+    <!-- <record id="action_water_billing" model="ir.actions.act_window">
+        <field name="name">Billing</field>
+        <field name="res_model">water.billing</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+    <!-- Menu -->
+    <!-- <menuitem id="menu_water_billing_records" parent="menu_water_billing_root"
+        name="Billing" action="action_water_billing" />
+
+    <menuitem id="menu_water_billing_history"
+        parent="menu_water_billing_records"
+        name="Billing History"
+        action="action_water_billing" /> -->
+
+</odoo>

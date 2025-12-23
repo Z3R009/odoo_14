@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <!-- Action to open the student.enrollment model -->
+    <record id="action_student_enrollment" model="ir.actions.act_window">
+        <field name="name">Student Enrollments</field>      <!-- Name of the action -->
+        <field name="res_model">student.enrollment</field>  <!-- Model to display -->
+        <field name="view_mode">tree,form</field>          <!-- View types -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create new enrollments here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_student_root"
+        name="Students"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_student_enrollment"
+        name="Enrollments"
+        parent="menu_student_root"
+        action="action_student_enrollment"
+        sequence="1"
+    />
+</odoo>

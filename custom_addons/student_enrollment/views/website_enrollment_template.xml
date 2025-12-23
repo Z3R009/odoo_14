@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<odoo>
+  <!-- Enrollment Form Page -->
+  <template id="enrollment_form" name="Enrollment Form" page="True">
+    <section class="container mt-5">
+      <h2>Student Enrollment</h2>
+      <form action="/enroll/submit" method="post">
+        <div>
+          <label>First Name</label>
+          <input type="text" name="first_name" required="1" />
+        </div>
+
+        <div>
+          <label>Middle Name</label>
+          <input type="text" name="middle_name" required="1" />
+        </div>
+
+        <div>
+          <label>Last Name</label>
+          <input type="text" name="last_name" required="1" />
+        </div>
+
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" />
+        </div>
+
+        <div>
+          <label>Phone</label>
+          <input type="text" name="phone" />
+        </div>
+
+        <div>
+          <label>Course</label>
+          <select name="course">
+            <option value="python">Python</option>
+            <option value="odoo">Odoo</option>
+            <option value="java">Java</option>
+          </select>
+        </div>
+
+        <button type="submit">Enroll</button>
+      </form>
+    </section>
+  </template>
+
+  <!-- Thank-You Page -->
+  <template id="enroll_thank_you" name="Enroll Thank You">
+    <section class="container mt-5">
+      <h2>Thank You!</h2>
+      <p>Your enrollment has been submitted.</p>
+    </section>
+  </template>
+</odoo>

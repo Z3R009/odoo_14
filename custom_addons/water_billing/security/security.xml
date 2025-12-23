@@ -1,0 +1,5 @@
+<odoo>
+    <record id="group_water_billing_manager" model="res.groups">
+        <field name="name">Water Billing Manager</field>
+    </record>
+</odoo>

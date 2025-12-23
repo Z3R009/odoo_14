@@ -1,0 +1,33 @@
+<odoo>
+
+    <record id="view_water_usage_graph" model="ir.ui.view">
+        <field name="name">water.billing.graph</field>
+        <field name="model">water.billing</field>
+        <field name="arch" type="xml">
+            <graph string="Water Usage Analysis" type="bar">
+                <field name="billing_date" type="row" />
+                <field name="usage" type="measure" />
+                <field name="member_id" type="col" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_water_usage_chart" model="ir.actions.act_window">
+        <field name="name">Water Usage Analysis</field>
+        <field name="res_model">water.billing</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_water_usage_graph" />
+    </record>
+
+    <!-- menu -->
+    <menuitem id="menu_water_billing_root" name="Water Billing" />
+
+    <menuitem id="menu_water_billing_chart" parent="menu_water_billing_root" name="Reports" />
+
+    <menuitem id="menu_water_usage_chart"
+        name="Water Usage Analysis"
+        parent="menu_water_billing_chart"
+        action="action_water_usage_chart" />
+
+
+</odoo>

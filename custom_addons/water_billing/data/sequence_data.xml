@@ -1,0 +1,8 @@
+<odoo>
+    <record id="seq_water_member" model="ir.sequence">
+        <field name="name">Water Member</field>
+        <field name="code">water.member</field>
+        <field name="prefix">WC-</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

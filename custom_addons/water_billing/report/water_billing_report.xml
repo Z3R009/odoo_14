@@ -1,0 +1,69 @@
+<odoo>
+    <report
+        id="action_water_billing_report"
+        string="Water Billing Report"
+        model="water.billing"
+        report_type="qweb-pdf"
+        name="water_billing.report_water_billing"
+        file="water_billing.report_water_billing"
+        print_report_name="data['report_name']"
+    />
+
+    <report
+        id="action_water_billing_report_html"
+        string="Water Billing Report (HTML Preview)"
+        model="water.billing"
+        report_type="qweb-html"
+        name="water_billing.report_water_billing"
+    />
+
+
+    <template id="report_water_billing">
+        <t t-call="web.html_container">
+
+
+            <div style="margin-bottom: 20px;">
+                <img t-att-src="'/water_billing/static/src/img/images.png'"
+                    style="height: 80px;" />
+                <h2>Water Billing Report</h2>
+            </div>
+
+            <table border="1" cellspacing="0" cellpadding="5"
+                style="border-collapse: collapse; width: 100%;">
+                <!-- Table Header -->
+                <thead>
+                    <tr style="background-color: #f2f2f2; text-align: left;">
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Usage</th>
+                        <th>Amount</th>
+                        <th>Paid</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <t t-foreach="docs" t-as="doc">
+                        <tr>
+                            <td>
+                                <t t-esc="doc.member_id.full_name" />
+                            </td>
+                            <td>
+                                <t t-esc="doc.billing_date" />
+                            </td>
+                            <td>
+                                <t t-esc="doc.usage" />
+                            </td>
+                            <td>
+                                <t t-esc="doc.amount or 0" />
+                                <t t-set="total_amount" />
+                            </td>
+                            <td>
+                                <t t-esc="'Paid' if doc.paid else 'Unpaid'" />
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+</odoo>

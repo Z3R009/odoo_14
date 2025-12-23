@@ -1,0 +1,88 @@
+<odoo>
+    <!-- Billing Tree View -->
+    <record id="view_read_meter_tree" model="ir.ui.view">
+        <field name="name">read.meter.tree</field>
+        <field name="model">read.meter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="transaction_id" />
+                <field name="billing_date"></field>
+                <field name="member_id" string="Customer Name" />
+                <field name="previous_reading"></field>
+                <field name="current_reading"></field>
+                <field name="usage" />
+                <field name="amount" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Billing Form View -->
+    <record id="view_read_meter_form" model="ir.ui.view">
+        <field name="name">read.meter.form</field>
+        <field name="model">read.meter</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!-- <header>
+                        <button string="Pay" type="object" name="action_pay" class="btn-primary"
+                            attrs="{'invisible':[('paid','=',True)]}" />
+                    </header> -->
+                    <group>
+                        <field name="transaction_id"
+                            style="font-size:20px; font-weight:bold; color: #black;"></field>
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="member_id" string="Customer Name" />
+                            <field name="billing_date" />
+                            <field name="usage" />
+                        </group>
+
+                        <group>
+                            <field name="previous_reading" readonly="1" />
+                            <field name="current_reading" readonly="1" />
+                            <!-- <field name="payment_amount" />
+                            <field name="paid" /> -->
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="amount"
+                            style="font-size:20px; font-weight:bold; color: #black;" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- <record id="action_read_meter" model="ir.actions.act_window">
+        <field name="name">Billing Records</field>
+        <field name="res_model">read.meter</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+    <!-- <record id="action_read_meter_history" model="ir.actions.act_window">
+        <field name="name">Billing History (Paid)</field>
+        <field name="res_model">read.meter</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('paid','=',True)]</field>
+    </record> -->
+
+    <record id="action_read_meter" model="ir.actions.act_window">
+        <field name="name">Read Meter</field>
+        <field name="res_model">read.meter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_read_meter_root" name="Water Billing" />
+
+    <!-- First-level submenu -->
+    <menuitem id="menu_read_meter" parent="menu_read_meter_root" name="Read Meter"
+        action="action_read_meter"
+    />
+
+
+</odoo>

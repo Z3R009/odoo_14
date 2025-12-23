@@ -1,0 +1,59 @@
+<odoo>
+    <!-- Member Tree View -->
+    <record id="view_water_member_tree" model="ir.ui.view">
+        <field name="name">water.member.tree</field>
+        <field name="model">water.member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="member_id" />
+                <field name="full_name" />
+                <field name="meter_number" />
+                <field name="address" />
+                <field name="phone" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Member Form View -->
+    <record id="view_water_member_form" model="ir.ui.view">
+        <field name="name">water.member.form</field>
+        <field name="model">water.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group class="o_label_top">
+                        <field name="member_id"
+                            style="font-size:20px; font-weight:bold; color: #black;" />
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="first_name" />
+                            <field name="middle_name" />
+                            <field name="last_name" />
+                        </group>
+
+                        <group>
+                            <field name="meter_number" />
+                            <field name="address" />
+                            <field name="phone" />
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_water_members" model="ir.actions.act_window">
+        <field name="name">Customer</field>
+        <field name="res_model">water.member</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_water_billing_root" name="Water Billing" />
+    <menuitem id="menu_water_members" parent="menu_water_billing_root"
+        name="Customers" action="action_water_members" />
+</odoo>

@@ -1,0 +1,53 @@
+<odoo>
+    <report
+        id="action_report_student_enrollment"
+        model="student.enrollment"
+        string="Student Enrollment Report"
+        report_type="qweb-pdf"
+        name="student_enrollment.report_student_enrollment"
+        file="student_enrollment.report_student_enrollment"
+        print_report_name="'Student Enrollment - %s' % (object.first_name)"
+    />
+
+    <template id="report_student_enrollment">
+        <t t-call="web.html_container">
+
+            <style>
+                h2{
+                text-align: center;
+                margin-bottom: 20px;
+                }
+            </style>
+
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h2>Student Enrollment</h2>
+                    <p>
+                        <strong>First Name:</strong>
+                        <span t-field="o.first_name" />
+                    </p>
+                    <p>
+                        <strong>Middle Name:</strong>
+                        <span t-field="o.middle_name" />
+                    </p>
+                    <p>
+                        <strong>Last Name:</strong>
+                        <span t-field="o.last_name" />
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <span t-field="o.email" />
+                    </p>
+                    <p>
+                        <strong>Phone:</strong>
+                        <span t-field="o.phone" />
+                    </p>
+                    <p>
+                        <strong>Course:</strong>
+                        <span t-field="o.course" />
+                    </p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
