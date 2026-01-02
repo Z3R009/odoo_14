@@ -1,0 +1,8 @@
+<odoo>
+    <record id="seq_pay_bills" model="ir.sequence">
+        <field name="name">Pay Bills</field>
+        <field name="code">pay.bills</field>
+        <field name="prefix">PB-</field>
+        <field name="padding">5</field>
+    </record>
+</odoo>

@@ -1,0 +1,106 @@
+<odoo>
+    <!-- Billing Tree View -->
+    <record id="view_pay_bills" model="ir.ui.view">
+        <field name="name">pay.bills.tree</field>
+        <field name="model">pay.bills</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reading_code" />
+                <field name="member_id" />
+                <field name="billing_date" />
+                <field name="previous_reading" />
+                <field name="current_reading" />
+                <field name="usage" />
+                <field name="arrears" />
+                <field name="amount" />
+                <field name="paid" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Billing Form View -->
+    <record id="view_pay_bills_form" model="ir.ui.view">
+        <field name="name">pay.bills.form</field>
+        <field name="model">pay.bills</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- HEADER -->
+                <header>
+                    <button name="action_pay_bill"
+                        type="object"
+                        string="Pay Bill"
+                        class="btn-primary"
+                        attrs="{'invisible': [('paid', '=', True)]}" />
+
+                    <field name="paid"
+                        widget="statusbar"
+                        statusbar_visible="False,True" />
+                </header>
+
+                <sheet>
+                    <!-- Reading ID -->
+                    <group>
+                        <field name="transaction_id"
+                            style="font-size:20px; font-weight:bold; color: #black;"></field>
+
+                        <field name="reading_code"
+                            readonly="1"
+                        />
+                    </group>
+
+                    <!-- Customer & Meter Info -->
+                    <group col="2">
+                        <group>
+                            <field name="member_id" readonly="1"
+                                style="font-size:20px; font-weight:bold;" />
+                            <field name="billing_date" readonly="1" />
+                            <field name="usage" readonly="1" />
+                        </group>
+
+                        <group>
+                            <field name="previous_reading" readonly="1" />
+                            <field name="current_reading" readonly="1" />
+                        </group>
+                    </group>
+
+                    <!-- Payment Section -->
+                    <group string="Payment">
+                        <group col="2">
+                            <field name="payment_amount"
+                                attrs="{'readonly': [('paid', '=', True)]}" />
+
+                            <field name="arrears" readonly="1"
+                                attrs="{'invisible': [('arrears', '=', 0)]}" />
+
+                            <field name="amount"
+                                readonly="1"
+                                style="font-size:20px; font-weight:bold;" />
+
+                        </group>
+
+                        <group col="2">
+                            <field name="payment_date" readonly="1" />
+                            <field name="paid" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_pay_bills" model="ir.actions.act_window">
+        <field name="name">Pay Bills</field>
+        <field name="res_model">pay.bills</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[('paid', '=', False)]</field> -->
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_water_billing_root" name="Water Billing" />
+
+    <menuitem id="menu_pay_bills"
+        parent="menu_water_billing_root"
+        name="Pay Bills"
+        action="action_pay_bills" />
+</odoo>

@@ -1,8 +1,8 @@
 <odoo>
     <report
         id="action_water_billing_report"
-        string="Water Billing Report"
-        model="water.billing"
+        string="Payment History Report"
+        model="payment.history"
         report_type="qweb-pdf"
         name="water_billing.report_water_billing"
         file="water_billing.report_water_billing"
@@ -11,8 +11,8 @@
 
     <report
         id="action_water_billing_report_html"
-        string="Water Billing Report (HTML Preview)"
-        model="water.billing"
+        string="Payment History Report (HTML Preview)"
+        model="payment.history"
         report_type="qweb-html"
         name="water_billing.report_water_billing"
     />
@@ -25,7 +25,7 @@
             <div style="margin-bottom: 20px;">
                 <img t-att-src="'/water_billing/static/src/img/images.png'"
                     style="height: 80px;" />
-                <h2>Water Billing Report</h2>
+                <h2>Payment History Report</h2>
             </div>
 
             <table border="1" cellspacing="0" cellpadding="5"

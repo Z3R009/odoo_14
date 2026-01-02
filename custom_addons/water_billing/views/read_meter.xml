@@ -5,11 +5,11 @@
         <field name="model">read.meter</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="transaction_id" />
-                <field name="billing_date"></field>
-                <field name="member_id" string="Customer Name" />
-                <field name="previous_reading"></field>
-                <field name="current_reading"></field>
+                <field name="reading_id" />
+                <field name="member_id" />
+                <field name="billing_datetime" />
+                <field name="previous_reading" />
+                <field name="current_reading" />
                 <field name="usage" />
                 <field name="amount" />
             </tree>
@@ -23,20 +23,15 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <!-- <header>
-                        <button string="Pay" type="object" name="action_pay" class="btn-primary"
-                            attrs="{'invisible':[('paid','=',True)]}" />
-                    </header> -->
                     <group>
-                        <field name="transaction_id"
+                        <field name="reading_id"
                             style="font-size:20px; font-weight:bold; color: #black;"></field>
                     </group>
 
                     <group col="2">
                         <group>
                             <field name="member_id" string="Customer Name" />
-                            <field name="billing_date" />
-                            <field name="usage" />
+                            <field name="billing_datetime" invisible="1" />
                         </group>
 
                         <group>
@@ -48,6 +43,8 @@
                     </group>
 
                     <group>
+                        <field name="usage" />
+                        <field name="arrears" />
                         <field name="amount"
                             style="font-size:20px; font-weight:bold; color: #black;" />
                     </group>
@@ -77,10 +74,10 @@
     </record>
 
     <!-- Menus -->
-    <menuitem id="menu_read_meter_root" name="Water Billing" />
+    <menuitem id="menu_water_billing_root" name="Water Billing" />
 
     <!-- First-level submenu -->
-    <menuitem id="menu_read_meter" parent="menu_read_meter_root" name="Read Meter"
+    <menuitem id="menu_read_meter" parent="menu_water_billing_root" name="Read Meter"
         action="action_read_meter"
     />
 

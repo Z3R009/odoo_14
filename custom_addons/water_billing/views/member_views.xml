@@ -54,6 +54,7 @@
 
     <!-- Menu -->
     <menuitem id="menu_water_billing_root" name="Water Billing" />
+
     <menuitem id="menu_water_members" parent="menu_water_billing_root"
         name="Customers" action="action_water_members" />
 </odoo>

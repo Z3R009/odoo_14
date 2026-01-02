@@ -1,0 +1,77 @@
+<odoo>
+
+    <!-- PDF Report -->
+    <report
+        id="action_payment_history_report"
+        string="Payment History Report"
+        model="payment.history"
+        report_type="qweb-pdf"
+        name="water_billing.payment_history_report"
+        file="water_billing.payment_history_report"
+    />
+
+    <!-- HTML Preview -->
+    <report
+        id="action_payment_history_report_html"
+        string="Payment History (HTML)"
+        model="payment.history"
+        report_type="qweb-html"
+        name="water_billing.payment_history_report"
+    />
+
+
+    <template id="payment_history_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+
+                <div class="page">
+                    <!-- HEADER -->
+                    <div style="margin-bottom: 20px;">
+                        <img t-att-src="'/water_billing/static/src/img/images.png'"
+                            style="height: 80px;" />
+                        <h2>Payment History Report</h2>
+                    </div>
+                    <br />
+
+                    <!-- TABLE -->
+                    <table class="table table-sm table-bordered"
+                        style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2; text-align: left;">
+                                <th>Customer Name</th>
+                                <th>Date</th>
+                                <th>Usage</th>
+                                <th>Amount</th>
+                                <th>Paid</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td>
+                                        <t t-esc="doc.member_id.full_name" />
+                                    </td>
+                                    <td>
+                                        <t t-esc="doc.billing_date" />
+                                    </td>
+                                    <td>
+                                        <t t-esc="doc.usage" />
+                                    </td>
+                                    <td>
+                                        <t t-esc="doc.amount or 0" />
+                                        <t t-set="total_amount" />
+                                    </td>
+                                    <td>
+                                        <t t-esc="'Paid' if doc.paid else 'Unpaid'" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
