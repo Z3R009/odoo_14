@@ -1,0 +1,31 @@
+<odoo>
+
+    <!-- root -->
+    <menuitem id="menu_water_billing_root" name="Water Billing" />
+
+    <!-- customer menu -->
+    <!-- <menuitem
+        id="menu_water_members" parent="menu_water_billing_root"
+        name="Customers" action="action_water_members" /> -->
+
+    <!-- read meter menu -->
+    <menuitem id="menu_read_meter"
+        parent="menu_water_billing_root" name="Read Meter"
+        action="action_read_meter"
+    /> b<!-- pay bills menu -->
+    
+    <menuitem id="menu_pay_bills"
+        parent="menu_water_billing_root"
+        name="Pay Bills"
+        action="action_pay_bills" />
+
+    <!-- graph menu -->
+
+    <menuitem id="menu_water_usage_chart"
+        name="Reports"
+        parent="menu_water_billing_root"
+        action="action_water_usage_chart"
+        sequence="99"
+    />
+
+</odoo>

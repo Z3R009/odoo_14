@@ -7,6 +7,10 @@ class ResPartner(models.Model):
     first_name = fields.Char("First Name")
     middle_name = fields.Char("Middle Name")
     last_name = fields.Char("Last Name")
+    is_water_member = fields.Boolean("Is Water Member")
+    member_id = fields.Char("Customer ID", readonly=True, ondelete='cascade', copy=False,
+        default=lambda self: self.env['ir.sequence'].next_by_code('water.member'))
+
 
     @api.onchange('first_name', 'middle_name', 'last_name')
     def _onchange_name_parts(self):

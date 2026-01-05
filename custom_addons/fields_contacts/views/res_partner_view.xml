@@ -6,59 +6,71 @@
     <field name="inherit_id" ref="base.view_partner_tree" />
     <field name="arch" type="xml">
       <xpath expr="//tree" position="inside">
+        <!-- Show split name fields only -->
         <field name="first_name" />
         <field name="middle_name" />
         <field name="last_name" />
+        <!-- Water member info -->
+        <field name="is_water_member" />
       </xpath>
     </field>
   </record>
 
-
-  <!-- Extend Contacts form view -->
 
   <record id="view_partner_form_inherit_custom" model="ir.ui.view">
     <field name="name">res.partner.form.inherit.custom</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
-
-      <!-- <xpath expr="//field[@name='name']" position="attributes">
-        <attribute name="readonly">1</attribute>
-      </xpath> -->
-
-
-      <xpath expr="//group[.//field[@name='street']]" position="before">
-        <group string="Name" colspan="4">
-          <div class="o_address_format">
-            <div class="o_col" style="width: 30%;">
-              <field name="first_name" placeholder="First Name"
-                attrs="{'invisible': [('is_company', '=', True)]}" />
-            </div>
-            <div class="o_col" style="width: 30%;">
-              <field name="middle_name" placeholder="Middle Name"
-                attrs="{'invisible': [('is_company', '=', True)]}" />
-            </div>
-            <div class="o_col" style="width: 30%;">
-              <field name="last_name" placeholder="Last Name"
-                attrs="{'invisible': [('is_company', '=', True)]}" />
-            </div>
-          </div>
+      <!-- Name fields group -->
+      <xpath expr="//sheet/group[.//field[@name='street']]" position="before">
+        <group string="Name" col="2">
+          <field name="first_name" attrs="{'invisible':[('is_company','=',True)]}" />
+          <field name="middle_name" attrs="{'invisible':[('is_company','=',True)]}" />
+          <field name="last_name" attrs="{'invisible':[('is_company','=',True)]}" />
         </group>
       </xpath>
 
+      <!-- Water Member Info group -->
+      <xpath expr="//sheet/group[.//field[@name='street']]" position="before">
+        <group string="Water Member Info" col="2">
+          <field name="is_water_member" />
+          <field name="member_id" attrs="{'readonly':[('is_water_member','=',False)]}" />
+
+        </group>
+      </xpath>
     </field>
   </record>
 
-  <!-- <record id="view_partner_form_inherit_custom" model="ir.ui.view">
+
+  <!-- Extend Contacts form view -->
+  <!-- 
+  <record id="view_partner_form_inherit_custom" model="ir.ui.view">
     <field name="name">res.partner.form.inherit.custom</field>
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
-      <xpath expr="//sheet/group" position="inside">
-        <field name="first_name" />
-        <field name="middle_name" />
-        <field name="last_name" />
+
+      <xpath expr="//group[.//field[@name='street']]" position="before">
+        <group string="Name" col="2">
+
+          <group>
+            <field name="first_name"
+              attrs="{'invisible': [('is_company', '=', True)]}" />
+
+            <field name="middle_name"
+              attrs="{'invisible': [('is_company', '=', True)]}" />
+
+            <field name="last_name"
+              attrs="{'invisible': [('is_company', '=', True)]}" />
+          </group>
+
+
+        </group>
       </xpath>
+
     </field>
   </record> -->
+
+
 </odoo>

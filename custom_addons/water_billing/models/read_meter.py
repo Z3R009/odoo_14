@@ -31,9 +31,11 @@ class ReadMeter(models.Model):
     )
 
     member_id = fields.Many2one(
-        'water.member',
-        string="Customer Name",
-        required=True
+        'res.partner',
+        string="Customer",
+        required=True,
+        domain="[('is_water_member','=',True)]",
+        ondelete='cascade'
     )
 
     previous_reading = fields.Float(string="Previous Reading")
@@ -84,7 +86,7 @@ class ReadMeter(models.Model):
     @api.model
     def create(self, vals):
         """Set previous reading and include arrears from latest bill"""
-        if 'member_id' in vals:
+        if 'member_id' in vals:  
             # Previous reading
             last_billing = self.search(
                 [('member_id', '=', vals['member_id'])],

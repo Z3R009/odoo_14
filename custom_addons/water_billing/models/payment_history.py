@@ -11,7 +11,7 @@ class PaymentHistory(models.Model):
         )
     reading_id = fields.Many2one('read.meter', string="Reading ID")
     reading_code = fields.Char(string="Reading ID")
-    member_id = fields.Many2one('water.member', string="Customer Name")
+    member_id = fields.Many2one('res.partner', string="Customer Name", ondelete='cascade')
     billing_date = fields.Datetime(string="Billing Date")
     previous_reading = fields.Float()
     current_reading = fields.Float()

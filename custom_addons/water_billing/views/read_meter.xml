@@ -67,19 +67,5 @@
         <field name="domain">[('paid','=',True)]</field>
     </record> -->
 
-    <record id="action_read_meter" model="ir.actions.act_window">
-        <field name="name">Read Meter</field>
-        <field name="res_model">read.meter</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <!-- Menus -->
-    <menuitem id="menu_water_billing_root" name="Water Billing" />
-
-    <!-- First-level submenu -->
-    <menuitem id="menu_read_meter" parent="menu_water_billing_root" name="Read Meter"
-        action="action_read_meter"
-    />
-
 
 </odoo>

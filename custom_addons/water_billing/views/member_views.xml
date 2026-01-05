@@ -45,16 +45,5 @@
         </field>
     </record>
 
-    <!-- Action -->
-    <record id="action_water_members" model="ir.actions.act_window">
-        <field name="name">Customer</field>
-        <field name="res_model">water.member</field>
-        <field name="view_mode">tree,form</field>
-    </record>
 
-    <!-- Menu -->
-    <menuitem id="menu_water_billing_root" name="Water Billing" />
-
-    <menuitem id="menu_water_members" parent="menu_water_billing_root"
-        name="Customers" action="action_water_members" />
 </odoo>

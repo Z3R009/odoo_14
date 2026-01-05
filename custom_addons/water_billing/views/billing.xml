@@ -87,20 +87,4 @@
             </form>
         </field>
     </record>
-
-    <!-- Action -->
-    <record id="action_pay_bills" model="ir.actions.act_window">
-        <field name="name">Pay Bills</field>
-        <field name="res_model">pay.bills</field>
-        <field name="view_mode">tree,form</field>
-        <!-- <field name="domain">[('paid', '=', False)]</field> -->
-    </record>
-
-    <!-- Menus -->
-    <menuitem id="menu_water_billing_root" name="Water Billing" />
-
-    <menuitem id="menu_pay_bills"
-        parent="menu_water_billing_root"
-        name="Pay Bills"
-        action="action_pay_bills" />
 </odoo>

@@ -1,0 +1,36 @@
+<odoo>
+
+
+    <!-- Customer action -->
+    <!-- <record id="action_water_members" model="ir.actions.act_window">
+        <field name="name">Customer</field>
+        <field name="res_model">water.member</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+    <!-- Read Meter action -->
+    <record id="action_read_meter" model="ir.actions.act_window">
+        <field name="name">Read Meter</field>
+        <field name="res_model">read.meter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- pay bills action -->
+
+    <record id="action_pay_bills" model="ir.actions.act_window">
+        <field name="name">Pay Bills</field>
+        <field name="res_model">pay.bills</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="domain">[('paid', '=', False)]</field> -->
+    </record>
+
+    <!-- graph action -->
+
+    <record id="action_water_usage_chart" model="ir.actions.act_window">
+        <field name="name">Water Usage Analysis</field>
+        <field name="res_model">pay.bills</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_water_usage_graph" />
+    </record>
+
+</odoo>

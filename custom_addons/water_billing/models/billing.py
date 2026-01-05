@@ -31,10 +31,13 @@ class PayBills(models.Model):
 
 
     member_id = fields.Many2one(
-        'water.member',
-        string="Customer Name",
-        required=True
+        'res.partner',
+        string="Customer",
+        required=True,
+        domain="[('is_water_member','=',True)]",
+        ondelete='cascade'
     )
+
 
     billing_date = fields.Date(
         string="Billing Date",
@@ -42,7 +45,9 @@ class PayBills(models.Model):
     )
 
     previous_reading = fields.Float(readonly=True)
+
     current_reading = fields.Float(readonly=True)
+
     usage = fields.Float(readonly=True)
 
     amount = fields.Float(
@@ -60,12 +65,6 @@ class PayBills(models.Model):
     payment_amount = fields.Float(
         string="Payment Amount",
         store=True
-    )
-
-    arrears = fields.Float(
-        string="Arrears",
-        readonly=True,
-        default=0.0
     )
 
     paid = fields.Boolean(
@@ -113,41 +112,3 @@ class PayBills(models.Model):
                 'payment_date': fields.Date.today(),
                 'paid': True,
             })
-
-
-
-    # def action_pay_bill(self):
-    #     for rec in self:
-    #         if rec.paid:
-    #             raise ValidationError("This bill is already paid.")
-
-    #         if rec.payment_amount <= 0:
-    #             raise ValidationError("Please enter a valid payment amount.")
-
-    #         if rec.payment_amount < rec.amount:
-    #             raise ValidationError(
-    #                 f"Payment is insufficient. Amount due is {rec.amount}."
-    #             )
-
-    #         # Mark the bill as paid
-    #         rec.write({
-    #             'paid': True,
-    #             'payment_date': fields.Date.today()
-    #         })
-
-    #         # Add to payment history
-    #         self.env['payment.history'].create({
-    #             'transaction_id': rec.transaction_id,
-    #             'reading_id': rec.reading_id.id,
-    #             'reading_code': rec.reading_code,
-    #             'member_id': rec.member_id.id,
-    #             'billing_date': rec.billing_date,
-    #             'previous_reading': rec.previous_reading,
-    #             'current_reading': rec.current_reading,
-    #             'usage': rec.usage,
-                
-    #             'amount': rec.amount,
-    #             'payment_date': rec.payment_date,
-    #             'paid': True,
-    #         })
-
