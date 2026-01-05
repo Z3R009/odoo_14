@@ -8,7 +8,7 @@ class ResPartner(models.Model):
     middle_name = fields.Char("Middle Name")
     last_name = fields.Char("Last Name")
     is_water_member = fields.Boolean("Is Water Member")
-    member_id = fields.Char("Customer ID", readonly=True, ondelete='cascade', copy=False,
+    member_id = fields.Char("Customer ID", readonly=True, store=True, ondelete='cascade', copy=False,
         default=lambda self: self.env['ir.sequence'].next_by_code('water.member'))
 
 

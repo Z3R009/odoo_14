@@ -50,7 +50,7 @@
                             <t t-foreach="docs" t-as="doc">
                                 <tr>
                                     <td>
-                                        <t t-esc="doc.member_id.full_name" />
+                                        <t t-esc="doc.member_id.name" />
                                     </td>
                                     <td>
                                         <t t-esc="doc.billing_date" />
