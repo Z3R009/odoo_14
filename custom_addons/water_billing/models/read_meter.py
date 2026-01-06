@@ -127,8 +127,21 @@ class ReadMeter(models.Model):
 
     @api.model
     def create(self, vals):
-        """Set previous reading and arrears from latest bill, do NOT create pay.bills yet"""
-        if 'member_id' in vals:  
+        """Set previous reading and arrears from latest bill, 
+        and prevent creating new reading if a draft exists"""
+        
+        if 'member_id' in vals:
+            # Check for existing draft for this customer
+            existing_draft = self.search([
+                ('member_id', '=', vals['member_id']),
+                ('state', '=', 'draft')
+            ], limit=1)
+            if existing_draft:
+                raise ValidationError(
+                    "There is already a draft billing for this customer. "
+                    "Please confirm it before creating a new reading."
+                )
+
             # Previous reading
             last_billing = self.search(
                 [('member_id', '=', vals['member_id'])],
@@ -151,7 +164,6 @@ class ReadMeter(models.Model):
 
         rec = super(ReadMeter, self).create(vals)
         return rec
-
 
 
     @api.onchange('member_id')
@@ -195,8 +207,6 @@ class ReadMeter(models.Model):
         return self.env.ref('water_billing.action_water_billing_report').report_action(records)
   
 # confirm button
-
-
     def write(self, vals):
             """Prevent editing confirmed records"""
             for rec in self:
