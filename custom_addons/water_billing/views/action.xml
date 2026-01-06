@@ -21,7 +21,15 @@
         <field name="name">Pay Bills</field>
         <field name="res_model">pay.bills</field>
         <field name="view_mode">tree,form</field>
-        <!-- <field name="domain">[('paid', '=', False)]</field> -->
+        <field name="domain">[('state', '=', False)]</field>
+    </record>
+
+    <!-- payment history action -->
+
+    <record id="action_payment_history" model="ir.actions.act_window">
+        <field name="name">Payment History</field>
+        <field name="res_model">payment.history</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <!-- graph action -->
@@ -32,5 +40,23 @@
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_water_usage_graph" />
     </record>
+
+
+    <!-- print Invoice -->
+
+    <record id="a_action_print_invoice" model="ir.actions.server">
+        <field name="name">Print Invoice</field>
+
+        <!-- Bind to read.meter list view -->
+        <field name="model_id" ref="model_read_meter" />
+        <field name="binding_model_id" ref="model_read_meter" />
+        <field name="binding_view_types">list</field>
+
+        <field name="state">code</field>
+        <field name="code">
+            action = env.ref('water_billing.report_print_invoice').report_action(records)
+        </field>
+    </record>
+
 
 </odoo>

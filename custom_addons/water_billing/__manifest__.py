@@ -19,6 +19,7 @@
         'views/read_meter.xml',
         'views/payment_history.xml',
         'report/payment_history_report.xml',
+        'report/print_invoice.xml',
         'views/usage_graph.xml',
     ],
     'installable': True,

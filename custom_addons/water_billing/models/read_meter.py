@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
 from datetime import datetime
+from datetime import timedelta
 
 class ReadMeter(models.Model):
     _name = "read.meter"
@@ -30,6 +31,19 @@ class ReadMeter(models.Model):
         store=True
     )
 
+    due_date = fields.Date(
+    string="Due Date",
+    compute="_compute_due_and_disconnect",
+    store=True
+)
+
+    disconnection_date = fields.Date(
+        string="Disconnection Date",
+        compute="_compute_due_and_disconnect",
+        store=True
+    )
+
+
     member_id = fields.Many2one(
         'res.partner',
         string="Customer",
@@ -47,6 +61,12 @@ class ReadMeter(models.Model):
 )
 
     usage = fields.Float(string="Usage")
+
+    current_charges = fields.Float(
+        string="Current Charges",
+        compute="_compute_charges",
+        store=True
+    )
     
     amount = fields.Float(
     string="Total Amount",
@@ -61,6 +81,16 @@ class ReadMeter(models.Model):
         default=0.0,
         help="Any unpaid amount from previous bills"
     )
+
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('confirmed', 'Confirmed')
+    ], string="Status", default='draft', readonly=True, store=True)
+
+    @api.depends('usage', 'current_charges')
+    def _compute_charges(self):
+        for rec in self:
+            rec.current_charges = (rec.usage or 0) * 15
 
     @api.depends('usage', 'arrears')
     def _compute_amount(self):
@@ -83,9 +113,21 @@ class ReadMeter(models.Model):
             else:
                 rec.billing_datetime = False
 
+    
+#   due date and disconnection date
+    @api.depends('billing_date')
+    def _compute_due_and_disconnect(self):
+        for rec in self:
+            if rec.billing_date:
+                rec.due_date = rec.billing_date + timedelta(days=15)
+                rec.disconnection_date = rec.due_date + timedelta(days=3)
+            else:
+                rec.due_date = False
+                rec.disconnection_date = False
+
     @api.model
     def create(self, vals):
-        """Set previous reading and include arrears from latest bill"""
+        """Set previous reading and arrears from latest bill, do NOT create pay.bills yet"""
         if 'member_id' in vals:  
             # Previous reading
             last_billing = self.search(
@@ -108,22 +150,8 @@ class ReadMeter(models.Model):
             vals['current_reading'] = vals['previous_reading'] + vals['usage']
 
         rec = super(ReadMeter, self).create(vals)
-
-        # Create pay.bills with arrears included
-        self.env['pay.bills'].create({
-            'reading_id': rec.id,
-            'member_id': rec.member_id.id,
-            'billing_date': rec.billing_date,
-            'previous_reading': rec.previous_reading,
-            'current_reading': rec.current_reading,
-            'usage': rec.usage,
-            # 'amount': rec.amount + rec.arrears,
-            'amount': rec.amount,
-            'arrears': rec.arrears,
-            'paid': False,
-        })
-
         return rec
+
 
 
     @api.onchange('member_id')
@@ -150,14 +178,6 @@ class ReadMeter(models.Model):
         )
         self.arrears = latest_bill.arrears if latest_bill and latest_bill.arrears > 0 else 0.0
 
-
-
-    # @api.onchange('usage')
-    # def _onchange_usage(self):
-    #     """Calculate current reading based on usage"""
-    #     for rec in self:
-    #         rec.current_reading = rec.previous_reading + rec.usage if rec.usage else rec.previous_reading
-
     def action_pay(self):
         """Simple pay action - optional"""
         for record in self:
@@ -174,3 +194,33 @@ class ReadMeter(models.Model):
             raise UserError("No billing records found to generate a report.")
         return self.env.ref('water_billing.action_water_billing_report').report_action(records)
   
+# confirm button
+
+
+    def write(self, vals):
+            """Prevent editing confirmed records"""
+            for rec in self:
+                if rec.state == 'confirmed':
+                    raise ValidationError("This record is confirmed and cannot be edited!")
+            return super(ReadMeter, self).write(vals)
+
+    def action_confirm(self):
+        """Confirm the bill and create pay.bills record"""
+        for rec in self:
+            if rec.state != 'draft':
+                continue
+            # Change state
+            rec.state = 'confirmed'
+
+            # Create pay.bills record at confirmation
+            self.env['pay.bills'].create({
+                'reading_id': rec.id,
+                'member_id': rec.member_id.id,
+                'billing_date': rec.billing_date,
+                'previous_reading': rec.previous_reading,
+                'current_reading': rec.current_reading,
+                'usage': rec.usage,
+                'amount': rec.amount,
+                'arrears': rec.arrears,
+                'state': False,
+            })

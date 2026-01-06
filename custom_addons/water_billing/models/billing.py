@@ -67,10 +67,11 @@ class PayBills(models.Model):
         store=True
     )
 
-    paid = fields.Boolean(
-        string="Paid",
-        default=False
-    )
+    state = fields.Selection([
+    ('unpaid', 'Unpaid'),
+    ('paid', 'Paid'),
+], string="Status", default='unpaid', readonly=True)
+
 
     payment_date = fields.Date(
         string="Payment Date",
@@ -80,7 +81,7 @@ class PayBills(models.Model):
 
     def action_pay_bill(self):
         for rec in self:
-            if rec.paid:
+            if rec.state == 'paid':
                 raise ValidationError("This bill is already paid.")
 
             if rec.payment_amount <= 0:
@@ -89,10 +90,10 @@ class PayBills(models.Model):
             # Calculate arrears if payment is insufficient
             arrears = max(0.0, rec.amount - rec.payment_amount)
 
-            # Always mark as paid, even if partial
+            # Mark bill as paid
             rec.write({
                 'arrears': arrears,
-                'paid': True,
+                'state': 'paid',
                 'payment_date': fields.Date.today(),
             })
 
@@ -107,8 +108,15 @@ class PayBills(models.Model):
                 'current_reading': rec.current_reading,
                 'usage': rec.usage,
                 'amount': rec.amount,
-                'payment_amount': rec.payment_amount, 
-                'arrears': arrears,  
+                'payment_amount': rec.payment_amount,
+                'arrears': arrears,
                 'payment_date': fields.Date.today(),
-                'paid': True,
+                'state': 'paid',
             })
+
+    def write(self, vals):
+        for rec in self:
+            if rec.state == 'paid':
+                raise ValidationError("Paid bills cannot be modified.")
+        return super().write(vals)
+

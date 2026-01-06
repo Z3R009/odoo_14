@@ -20,4 +20,4 @@ class PaymentHistory(models.Model):
     payment_amount = fields.Float(string="Amount Paid", store=True)
     arrears = fields.Float(string="Arrears", store=True)
     payment_date = fields.Date(string="Payment Date")
-    paid = fields.Boolean(default=True)
+    state = fields.Boolean(default=True)

@@ -16,7 +16,7 @@
                 <field name="amount" />
                 <field name="payment_amount" />
                 <field name="arrears" />
-                <field name="paid" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -73,12 +73,6 @@
     </record>
 
 
-    <record id="action_payment_history" model="ir.actions.act_window">
-        <field name="name">Payment History</field>
-        <field name="res_model">payment.history</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
     <!-- print -->
     <record id="action_payment_history_print" model="ir.actions.server">
         <field name="name">Print Payment History</field>
@@ -103,17 +97,5 @@
     <menuitem id="menu_water_billing_root" name="Water Billing" />
 
     <!-- First-level submenu -->
-    <menuitem id="menu_payment_history"
-        name="Payment History"
-        parent="menu_water_billing_root"
-        action="action_payment_history" />
 
-
-    <!-- Second-level submenus -->
-    <!-- <menuitem id="menu_water_billing_records" parent="menu_water_billing"
-        name="Billing Records" action="action_water_billing" />
-
-
-    <menuitem id="menu_water_billing_history" parent="menu_water_billing"
-        name="Billing History (Paid)" action="action_water_billing_history" /> -->
 </odoo>

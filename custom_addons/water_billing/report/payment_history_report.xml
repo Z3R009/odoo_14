@@ -26,11 +26,19 @@
 
             <div class="page">
                 <!-- HEADER -->
-                <div style="margin-bottom: 20px;">
-                    <img t-att-src="'/water_billing/static/src/img/images.png'"
-                        style="height: 80px;" />
-                    <h2>Payment History Report</h2>
-                </div>
+                <!-- HEADER -->
+                <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
+                    <tr>
+                        <td style="width: 80px; vertical-align: middle;">
+                            <img t-att-src="'/water_billing/static/src/img/images.png'"
+                                style="height: 70px;" />
+                        </td>
+                        <td style="vertical-align: middle; padding-left: 10px;">
+                            <h2 style="margin: 0;">Payment History Report</h2>
+                        </td>
+                    </tr>
+                </table>
+
                 <br />
 
                 <!-- TABLE -->

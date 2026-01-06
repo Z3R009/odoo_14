@@ -12,12 +12,20 @@
     <menuitem id="menu_read_meter"
         parent="menu_water_billing_root" name="Read Meter"
         action="action_read_meter"
-    /> b<!-- pay bills menu -->
-    
+    />
+    <!-- pay bills menu -->
+
     <menuitem id="menu_pay_bills"
         parent="menu_water_billing_root"
         name="Pay Bills"
         action="action_pay_bills" />
+
+    <!-- payment history menu -->
+
+    <menuitem id="menu_payment_history"
+        name="Payment History"
+        parent="menu_water_billing_root"
+        action="action_payment_history" />
 
     <!-- graph menu -->
 

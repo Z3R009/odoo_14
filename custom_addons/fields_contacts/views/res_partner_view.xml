@@ -23,13 +23,6 @@
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
       <!-- Name fields group -->
-      <xpath expr="//sheet/group[.//field[@name='street']]" position="before">
-        <group string="Name" col="2">
-          <field name="first_name" attrs="{'invisible':[('is_company','=',True)]}" />
-          <field name="middle_name" attrs="{'invisible':[('is_company','=',True)]}" />
-          <field name="last_name" attrs="{'invisible':[('is_company','=',True)]}" />
-        </group>
-      </xpath>
 
       <!-- Water Member Info group -->
       <xpath expr="//sheet/group[.//field[@name='street']]" position="before">
@@ -39,6 +32,16 @@
 
         </group>
       </xpath>
+
+      <xpath expr="//sheet/group[.//field[@name='street']]" position="before">
+        <group string="Name" col="2">
+          <field name="first_name" attrs="{'invisible':[('is_company','=',True)]}" />
+          <field name="middle_name" attrs="{'invisible':[('is_company','=',True)]}" />
+          <field name="last_name" attrs="{'invisible':[('is_company','=',True)]}" />
+        </group>
+      </xpath>
+
+
     </field>
   </record>
 

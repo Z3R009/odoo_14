@@ -13,7 +13,7 @@
                 <field name="usage" />
                 <field name="arrears" />
                 <field name="amount" />
-                <field name="paid" />
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -30,11 +30,12 @@
                         type="object"
                         string="Pay Bill"
                         class="btn-primary"
-                        attrs="{'invisible': [('paid', '=', True)]}" />
+                        attrs="{'invisible': [('state', '=', 'paid')]}" />
 
-                    <field name="paid"
+                    <field name="state"
                         widget="statusbar"
-                        statusbar_visible="False,True" />
+                        statusbar_visible="unpaid,paid" />
+
                 </header>
 
                 <sheet>
@@ -67,7 +68,7 @@
                     <group string="Payment">
                         <group col="2">
                             <field name="payment_amount"
-                                attrs="{'readonly': [('paid', '=', True)]}" />
+                                attrs="{'readonly': [('state', '=', 'paid')]}" />
 
                             <field name="arrears" readonly="1"
                                 attrs="{'invisible': [('arrears', '=', 0)]}" />
@@ -80,7 +81,6 @@
 
                         <group col="2">
                             <field name="payment_date" readonly="1" />
-                            <field name="paid" readonly="1" />
                         </group>
                     </group>
                 </sheet>
