@@ -129,12 +129,15 @@ class ReadMeter(models.Model):
     @api.model
     def create(self, vals):
         """Set previous reading and arrears from latest bill, 
-        and prevent creating new reading if a draft exists"""
+        prevent creating new reading if a draft exists,
+        and prevent creating new reading if the latest bill is unpaid."""
         
         if 'member_id' in vals:
+            member_id = vals['member_id']
+
             # Check for existing draft for this customer
             existing_draft = self.search([
-                ('member_id', '=', vals['member_id']),
+                ('member_id', '=', member_id),
                 ('state', '=', 'draft')
             ], limit=1)
             if existing_draft:
@@ -143,17 +146,27 @@ class ReadMeter(models.Model):
                     "Please confirm it before creating a new reading."
                 )
 
+            # Check for unpaid bills
+            unpaid_bill = self.env['pay.bills'].search([
+                ('member_id', '=', member_id),
+                ('state', '!=', 'paid')  # assuming 'paid' is the state for paid bills
+            ], limit=1)
+            if unpaid_bill:
+                raise ValidationError(
+                    "The customer has unpaid bills. Please settle the previous bill before creating a new reading."
+                )
+
             # Previous reading
             last_billing = self.search(
-                [('member_id', '=', vals['member_id'])],
+                [('member_id', '=', member_id)],
                 order='billing_date desc, id desc',
                 limit=1
             )
             vals['previous_reading'] = last_billing.current_reading if last_billing else 0
 
-            # Latest pay.bills record
+            # Latest pay.bills record for arrears
             latest_bill = self.env['pay.bills'].search(
-                [('member_id', '=', vals['member_id'])],
+                [('member_id', '=', member_id)],
                 order='billing_date desc, id desc',
                 limit=1
             )
@@ -165,6 +178,7 @@ class ReadMeter(models.Model):
 
         rec = super(ReadMeter, self).create(vals)
         return rec
+
 
 
     @api.onchange('member_id')
