@@ -6,6 +6,7 @@ from datetime import timedelta
 class ReadMeter(models.Model):
     _name = "read.meter"
     _description = "Read Meter"
+    _order = "billing_date desc, id desc"
 
     reading_id = fields.Char(
         string="Reading ID",

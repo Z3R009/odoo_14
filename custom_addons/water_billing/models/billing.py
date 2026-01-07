@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class PayBills(models.Model):
     _name = "pay.bills"
     _description = "Pay Bills"
+    
 
 
     transaction_id = fields.Char(
@@ -70,7 +71,7 @@ class PayBills(models.Model):
     state = fields.Selection([
     ('unpaid', 'Unpaid'),
     ('paid', 'Paid'),
-], string="Status", default='unpaid', readonly=True)
+    ], string="Status", default='unpaid', readonly=True)
 
 
     payment_date = fields.Date(

@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 class PaymentHistory(models.Model):
     _name = "payment.history"
     _description = "Payment History"
+    _order = "payment_date desc, id desc"
 
     transaction_id = fields.Char(
         # 'pay.bills',

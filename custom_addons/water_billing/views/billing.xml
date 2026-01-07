@@ -13,7 +13,7 @@
                 <field name="usage" />
                 <field name="arrears" />
                 <field name="amount" />
-                <field name="state" />
+                <!-- <field name="state" /> -->
             </tree>
         </field>
     </record>

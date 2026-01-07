@@ -16,7 +16,7 @@
                 <field name="amount" />
                 <field name="payment_amount" />
                 <field name="arrears" />
-                <field name="state" />
+                <!-- <field name="state" /> -->
             </tree>
         </field>
     </record>
@@ -85,17 +85,5 @@
         </field>
     </record>
 
-
-    <!-- <record id="action_water_billing_history" model="ir.actions.act_window">
-        <field name="name">Billing History (Paid)</field>
-        <field name="res_model">water.billing</field>
-        <field name="view_mode">tree</field>
-        <field name="domain">[('paid','=',True)]</field>
-    </record> -->
-
-    <!-- Menus -->
-    <menuitem id="menu_water_billing_root" name="Water Billing" />
-
-    <!-- First-level submenu -->
 
 </odoo>
