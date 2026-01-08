@@ -247,6 +247,7 @@ class ReadMeter(models.Model):
                 'previous_reading': rec.previous_reading,
                 'current_reading': rec.current_reading,
                 'usage': rec.usage,
+                'current_charges': rec.current_charges,
                 'amount': rec.amount,
                 'arrears': rec.arrears,
                 'state': False,

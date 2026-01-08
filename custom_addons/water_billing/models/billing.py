@@ -51,6 +51,11 @@ class PayBills(models.Model):
 
     usage = fields.Float(readonly=True)
 
+    current_charges = fields.Float(
+        string="Current Charges",
+        readonly=True
+    )
+
     amount = fields.Float(
         string="Total Bill",
         readonly=True  
@@ -63,17 +68,23 @@ class PayBills(models.Model):
     # compute="_compute_arrears"
     )
 
+    current_arrears = fields.Float(
+        string="Current Arrears",
+        readonly=True,
+        compute="_compute_arrears"
+    )
+
 
     payment_amount = fields.Float(
         string="Payment Amount",
         store=True
     )
 
-    # change = fields.Float(
-    #     string="Change",
-    #     readonly=True,
-    #     compute="_compute_change"
-    # )
+    change = fields.Float(
+        string="Change",
+        readonly=True,
+        compute="_compute_change"
+    )
 
     state = fields.Selection([
     ('unpaid', 'Unpaid'),
@@ -92,10 +103,10 @@ class PayBills(models.Model):
             rec.change = (rec.payment_amount or 0.0) - (rec.amount or 0.0)
 
 
-    # @api.depends('change')
-    # def _compute_arrears(self):
-    #     for rec in self:
-    #         rec.arrears = abs(rec.change) if rec.change < 0 else 0.0
+    @api.depends('change')
+    def _compute_arrears(self):
+        for rec in self:
+            rec.current_arrears = abs(rec.change) if rec.change < 0 else 0.0
 
 
     def action_pay_bill(self):

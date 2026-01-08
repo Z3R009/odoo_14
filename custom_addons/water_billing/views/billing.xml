@@ -56,6 +56,12 @@
                                 style="font-size:20px; font-weight:bold;" />
                             <field name="billing_date" readonly="1" />
                             <field name="usage" readonly="1" />
+                            <field name="current_charges" readonly="1" />
+                            <field name="arrears" readonly="1" />
+
+                            <field name="amount"
+                                readonly="1"
+                                style="font-size:20px; font-weight:bold;" />
                         </group>
 
                         <group>
@@ -70,17 +76,14 @@
                             <field name="payment_amount"
                                 attrs="{'readonly': [('state', '=', 'paid')]}" />
 
-                            <field name="arrears" readonly="1"
-                                attrs="{'invisible': [('arrears', '=', 0)]}" />
+                            <field name="current_arrears" readonly="1"
+                            />
+                            <!-- attrs="{'invisible': [('current_arrears', '=', 0)]}"  -->
 
-                            <field name="amount"
-                                readonly="1"
-                                style="font-size:20px; font-weight:bold;" />
+                            <field name="change" readonly="1"
+                                attrs="{'invisible': [('change', '&lt;', 0)]}" />
 
-                        </group>
 
-                        <group col="2">
-                            <field name="payment_date" readonly="1" />
                         </group>
                     </group>
                 </sheet>
