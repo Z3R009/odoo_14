@@ -93,6 +93,8 @@ class ReadMeter(models.Model):
         for rec in self:
             rec.current_charges = (rec.usage or 0) * 15
 
+            
+
     @api.depends('usage', 'arrears')
     def _compute_amount(self):
         for rec in self:
