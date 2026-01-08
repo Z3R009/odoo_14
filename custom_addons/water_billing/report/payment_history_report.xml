@@ -71,7 +71,7 @@
                                     <t t-set="total_amount" />
                                 </td>
                                 <td>
-                                    <t t-esc="'Paid' if doc.paid else 'Unpaid'" />
+                                    <t t-esc="'Paid' if doc.state else 'Unpaid'" />
                                 </td>
                             </tr>
                         </t>
