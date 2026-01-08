@@ -10,6 +10,12 @@ class PaymentHistory(models.Model):
         # 'pay.bills',
         string="Transaction ID"
         )
+    
+    pay_bill_id = fields.Many2one(
+        'pay.bills',
+        string="Bill",
+        ondelete='cascade'
+    )
     reading_id = fields.Many2one('read.meter', string="Reading ID")
     reading_code = fields.Char(string="Reading ID")
     member_id = fields.Many2one('res.partner', string="Customer Name", ondelete='cascade')
@@ -17,8 +23,14 @@ class PaymentHistory(models.Model):
     previous_reading = fields.Float()
     current_reading = fields.Float()
     usage = fields.Float()
+    current_charges = fields.Float(string="Current Charges")
     amount = fields.Float(string="Total Bill")
     payment_amount = fields.Float(string="Amount Paid", store=True)
+    change = fields.Float(string="Change", store=True)
     arrears = fields.Float(string="Arrears", store=True)
     payment_date = fields.Date(string="Payment Date")
-    state = fields.Boolean(default=True)
+    state = fields.Selection(
+        related='pay_bill_id.state',
+        string="Status",
+        readonly=True
+    )

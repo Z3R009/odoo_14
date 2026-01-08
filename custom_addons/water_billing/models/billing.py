@@ -69,7 +69,7 @@ class PayBills(models.Model):
     )
 
     current_arrears = fields.Float(
-        string="Current Arrears",
+        string="Arrears (For Next Bill)",
         readonly=True,
         compute="_compute_arrears"
     )
@@ -129,6 +129,7 @@ class PayBills(models.Model):
 
             # Record payment history
             self.env['payment.history'].create({
+                'pay_bill_id': rec.id,
                 'transaction_id': rec.transaction_id,
                 'reading_id': rec.reading_id.id,
                 'reading_code': rec.reading_code,
@@ -137,9 +138,10 @@ class PayBills(models.Model):
                 'previous_reading': rec.previous_reading,
                 'current_reading': rec.current_reading,
                 'usage': rec.usage,
+                'current_charges': rec.current_charges,
                 'amount': rec.amount,
                 'payment_amount': rec.payment_amount,
-                # 'change': rec.change,
+                'change': rec.change if rec.change > 0 else 0.0,
                 'arrears': arrears,
                 'payment_date': fields.Date.today(),
                 'state': 'paid',
