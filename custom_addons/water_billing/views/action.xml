@@ -34,11 +34,16 @@
 
     <!-- graph action -->
 
-    <record id="action_water_usage_chart" model="ir.actions.act_window">
+    <record id="action_water_usage_analysis" model="ir.actions.act_window">
         <field name="name">Water Usage Analysis</field>
         <field name="res_model">pay.bills</field>
-        <field name="view_mode">graph</field>
-        <field name="view_id" ref="view_water_usage_graph" />
+        <field name="view_mode">pivot,graph</field>
+        <field name="view_id" ref="view_water_usage_pivot" /> <!-- default view -->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Analyze water usage by member and billing date.
+            </p>
+        </field>
     </record>
 
 
@@ -58,12 +63,5 @@
         </field>
     </record>
 
-
-    <!-- Report -->
-    <record id="action_payment_history_reports" model="ir.actions.act_window">
-        <field name="name">Water Billing Reports</field>
-        <field name="res_model">payment.history</field>
-        <field name="view_mode">pivot,graph</field>
-    </record>
 
 </odoo>

@@ -1,5 +1,5 @@
 <odoo>
-
+    <!-- Graph View -->
     <record id="view_water_usage_graph" model="ir.ui.view">
         <field name="name">pay.bills.graph</field>
         <field name="model">pay.bills</field>
@@ -12,5 +12,17 @@
         </field>
     </record>
 
+    <!-- Pivot View -->
+    <record id="view_water_usage_pivot" model="ir.ui.view">
+        <field name="name">pay.bills.pivot</field>
+        <field name="model">pay.bills</field>
+        <field name="arch" type="xml">
+            <pivot string="Water Usage Pivot Analysis">
+                <field name="billing_date" type="row" />
+                <field name="member_id" type="col" />
+                <field name="usage" type="measure" />
+            </pivot>
+        </field>
+    </record>
 
 </odoo>
