@@ -29,11 +29,21 @@
 
     <!-- graph menu -->
 
+    <menuitem id="menu_water_reports_root"
+        parent="menu_water_billing_root"
+        name="Reports"
+        sequence="90" />
+
     <menuitem id="menu_water_usage_chart"
         name="Reports"
-        parent="menu_water_billing_root"
+        parent="menu_water_reports_root"
         action="action_water_usage_chart"
-        sequence="99"
     />
+
+    <menuitem id="menu_payment_reports"
+        parent="menu_water_reports_root"
+        name="Financial Reports"
+        action="action_payment_history_reports" />
+
 
 </odoo>

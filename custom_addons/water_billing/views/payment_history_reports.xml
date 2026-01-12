@@ -1,0 +1,54 @@
+<odoo>
+
+    <!-- PAYMENT PIVOT -->
+    <record id="view_payment_history_pivot" model="ir.ui.view">
+        <field name="name">payment.history.pivot</field>
+        <field name="model">payment.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Payment Analysis">
+                <field name="payment_date" type="row" interval="day" />
+                <field name="payment_amount" type="measure" />
+                <field name="amount" type="measure" />
+                <field name="arrears" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- CONSUMPTION PIVOT -->
+    <record id="view_consumption_pivot" model="ir.ui.view">
+        <field name="name">payment.history.consumption.pivot</field>
+        <field name="model">payment.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Consumption Trends">
+                <field name="billing_date" type="row" interval="month" />
+                <field name="usage" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- COLLECTION GRAPH -->
+    <record id="view_payment_history_graph" model="ir.ui.view">
+        <field name="name">payment.history.graph</field>
+        <field name="model">payment.history</field>
+        <field name="arch" type="xml">
+            <graph string="Collections" type="bar">
+                <field name="payment_date" type="row" interval="month" />
+                <field name="payment_amount" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- USAGE GRAPH -->
+    <record id="view_usage_graph" model="ir.ui.view">
+        <field name="name">payment.history.usage.graph</field>
+        <field name="model">payment.history</field>
+        <field name="arch" type="xml">
+            <graph string="Water Usage" type="line">
+                <field name="billing_date" type="row" interval="month" />
+                <field name="usage" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+
+</odoo>
