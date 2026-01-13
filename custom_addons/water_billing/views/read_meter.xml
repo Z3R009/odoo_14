@@ -55,8 +55,8 @@
                         <group>
                             <field name="previous_reading" readonly="1" />
                             <field name="current_reading" readonly="1" />
-                            <!-- <field name="payment_amount" />
-                            <field name="paid" /> -->
+                            <field name="billing_month" readonly="1" />
+                            <field name="start_date" readonly="1" />
                         </group>
                     </group>
 
