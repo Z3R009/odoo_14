@@ -15,8 +15,10 @@
                 <field name="arrears" />
                 <field name="amount" />
                 <field name="state"
-                    decoration-warning="state=='draft'"
-                    decoration-success="state=='confirmed'" />
+                    widget="badge"
+                    decoration-warning="state == 'draft'"
+                    decoration-success="state == 'confirmed'" />
+
             </tree>
         </field>
     </record>
