@@ -32,13 +32,8 @@
     <menuitem id="menu_water_reports_root"
         parent="menu_water_billing_root"
         name="Reports"
-        sequence="90" />
-
-    <menuitem id="menu_water_usage_analysis"
-        name="Reports"
-        parent="menu_water_reports_root"
         action="action_water_usage_analysis"
-    />
+        sequence="90" />
 
 
 </odoo>

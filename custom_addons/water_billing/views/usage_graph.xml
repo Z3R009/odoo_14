@@ -4,8 +4,8 @@
         <field name="name">pay.bills.graph</field>
         <field name="model">pay.bills</field>
         <field name="arch" type="xml">
-            <graph string="Water Usage Analysis" type="bar">
-                <field name="billing_date" type="row" />
+            <graph type="bar">
+                <field name="billing_date" type="row" interval="day" />
                 <field name="usage" type="measure" />
                 <field name="member_id" type="col" />
             </graph>
@@ -17,7 +17,7 @@
         <field name="name">pay.bills.pivot</field>
         <field name="model">pay.bills</field>
         <field name="arch" type="xml">
-            <pivot string="Water Usage Pivot Analysis">
+            <pivot>
                 <field name="billing_date" type="row" />
                 <field name="member_id" type="col" />
                 <field name="usage" type="measure" />
