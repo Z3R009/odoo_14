@@ -28,8 +28,10 @@
                 <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
                     <tr>
                         <td style="width: 50px; vertical-align: middle;">
-                            <img t-att-src="'/water_billing/static/src/img/images.png'"
+                            <img
+                                t-att-src="('%s/water_billing/static/src/img/images.png' % env['ir.config_parameter'].sudo().get_param('web.base.url'))"
                                 style="height: 70px;" />
+
                         </td>
                         <td style="vertical-align: middle; padding-left: 10px;">
                             <h2 style="margin: 0;">Water Billing Invoice</h2>
