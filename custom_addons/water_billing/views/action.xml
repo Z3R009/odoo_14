@@ -63,5 +63,13 @@
         </field>
     </record>
 
+    <!-- wizard -->
+
+    <record id="action_generate_billing_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Billing</field>
+        <field name="res_model">generate.billing.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 
 </odoo>

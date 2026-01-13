@@ -1,0 +1,28 @@
+from odoo import models, fields, api
+from odoo.exceptions import UserError
+
+class GenerateBillingWizard(models.TransientModel):
+    _name = 'generate.billing.wizard'
+    _description = 'Generate Water Billing'
+
+    start_date = fields.Date(string="Start Date", required=True)
+    end_date = fields.Date(string="End Date", required=True)
+
+    def action_generate_billing(self):
+        self.ensure_one()
+
+        if self.start_date > self.end_date:
+            raise UserError("Start Date cannot be after End Date.")
+
+        partners = self.env['res.partner'].search([
+            ('is_water_member', '=', True)
+        ])
+
+        for partner in partners:
+            self.env['read.meter'].create({
+                'member_id': partner.id,
+                'billing_date': self.end_date, 
+                'usage': 0.0,
+            })
+
+        return {'type': 'ir.actions.client', 'tag': 'reload'}

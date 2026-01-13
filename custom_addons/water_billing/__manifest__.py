@@ -22,6 +22,7 @@
         'views/menu.xml',
         'report/payment_history_report.xml',
         'report/print_invoice.xml',
+        'views/generate_billing_wizard.xml',
     ],
     'installable': True,
     'application': True, 
