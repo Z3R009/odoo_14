@@ -13,6 +13,20 @@
         parent="menu_water_billing_root" name="Read Meter"
         action="action_read_meter"
     />
+
+    <menuitem id="menu_read_meter_single"
+        parent="menu_read_meter" name="Generate Single Billing"
+        action="action_read_meter"
+    />
+
+    <!-- wizard menu -->
+
+    <menuitem id="menu_generate_billing_wizard"
+        parent="menu_read_meter"
+        name="Generate Multiple Billing"
+        action="action_generate_billing_wizard"
+        sequence="100" />
+
     <!-- pay bills menu -->
 
     <menuitem id="menu_pay_bills"
@@ -34,15 +48,6 @@
         name="Reports"
         action="action_water_usage_analysis"
         sequence="90" />
-
-
-    <!-- wizard menu -->
-
-    <menuitem id="menu_generate_billing_wizard"
-        parent="menu_water_billing_root"
-        name="Generate Billing"
-        action="action_generate_billing_wizard"
-        sequence="100" />
 
 
 </odoo>

@@ -270,52 +270,52 @@ class ReadMeter(models.Model):
 
 # billing month
 
-    @api.model
-    def create(self, vals):
-        if 'member_id' in vals:
-            member_id = vals['member_id']
+    # @api.model
+    # def create(self, vals):
+    #     if 'member_id' in vals:
+    #         member_id = vals['member_id']
             
-            # Find last billing for this member
-            last_billing = self.search(
-                [('member_id', '=', member_id)],
-                order='billing_date desc',
-                limit=1
-            )
+    #         # Find last billing for this member
+    #         last_billing = self.search(
+    #             [('member_id', '=', member_id)],
+    #             order='billing_date desc',
+    #             limit=1
+    #         )
             
-            # Set start_date = last billing date if exists, otherwise today - optional
-            vals['start_date'] = last_billing.billing_date if last_billing else fields.Date.today()
+    #         # Set start_date = last billing date if exists, otherwise today - optional
+    #         vals['start_date'] = last_billing.billing_date if last_billing else fields.Date.today()
             
-            # Set end_date = today
-            end_date = fields.Date.today()
-            vals['billing_date'] = end_date
+    #         # Set end_date = today
+    #         end_date = fields.Date.today()
+    #         vals['billing_date'] = end_date
             
-            # Compute billing_month = month name of end_date (January, February...)
-            billing_month = end_date.strftime('%B')
-            vals['billing_month'] = billing_month
+    #         # Compute billing_month = month name of end_date (January, February...)
+    #         billing_month = end_date.strftime('%B')
+    #         vals['billing_month'] = billing_month
 
-            # Check if billing for this month already exists
-            existing = self.search([
-                ('member_id', '=', member_id),
-                ('billing_month', '=', billing_month)
-            ], limit=1)
-            if existing:
-                raise ValidationError(
-                    f"A billing for this member for {billing_month} is already done!"
-                )
+    #         # Check if billing for this month already exists
+    #         existing = self.search([
+    #             ('member_id', '=', member_id),
+    #             ('billing_month', '=', billing_month)
+    #         ], limit=1)
+    #         if existing:
+    #             raise ValidationError(
+    #                 f"A billing for this member for {billing_month} is already done!"
+    #             )
             
-            # Set previous reading from last billing
-            vals['previous_reading'] = last_billing.current_reading if last_billing else 0
+    #         # Set previous reading from last billing
+    #         vals['previous_reading'] = last_billing.current_reading if last_billing else 0
 
-            # Get latest arrears from pay.bills
-            latest_bill = self.env['pay.bills'].search(
-                [('member_id', '=', member_id)],
-                order='billing_date desc',
-                limit=1
-            )
-            vals['arrears'] = latest_bill.arrears if latest_bill and latest_bill.arrears > 0 else 0.0
+    #         # Get latest arrears from pay.bills
+    #         latest_bill = self.env['pay.bills'].search(
+    #             [('member_id', '=', member_id)],
+    #             order='billing_date desc',
+    #             limit=1
+    #         )
+    #         vals['arrears'] = latest_bill.arrears if latest_bill and latest_bill.arrears > 0 else 0.0
 
-        # Compute current reading if usage is provided
-        if 'usage' in vals:
-            vals['current_reading'] = vals['previous_reading'] + vals['usage']
+    #     # Compute current reading if usage is provided
+    #     if 'usage' in vals:
+    #         vals['current_reading'] = vals['previous_reading'] + vals['usage']
 
-        return super(ReadMeter, self).create(vals)
+    #     return super(ReadMeter, self).create(vals)
