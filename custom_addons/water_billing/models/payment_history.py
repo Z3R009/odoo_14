@@ -23,7 +23,7 @@ class PaymentHistory(models.Model):
     previous_reading = fields.Float()
     current_reading = fields.Float()
     usage = fields.Float()
-    
+
     start_date = fields.Date(
         string="Start Date",
         readonly=True

@@ -16,6 +16,7 @@
                 <field name="amount" />
                 <field name="payment_amount" />
                 <field name="arrears" />
+                <field name="billing_month" />
                 <!-- <field name="state" /> -->
             </tree>
         </field>

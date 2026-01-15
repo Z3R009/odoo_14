@@ -18,8 +18,8 @@ class BillingPeriodWizard(models.TransientModel):
     def action_view_records(self):
         self.ensure_one()
 
-        if self.start_date > self.end_date:
-            raise UserError("Start Date cannot be after End Date.")
+        if self.start_date >= self.end_date:
+            raise UserError("Start Date cannot be after or the same as End Date.")
 
         domain = [
             ('billing_date', '>=', self.start_date),
@@ -29,7 +29,7 @@ class BillingPeriodWizard(models.TransientModel):
         return {
             'type': 'ir.actions.act_window',
             'name': 'Billing Records',
-            'res_model': 'read.meter',
+            'res_model': 'payment.history',
             'view_mode': 'tree,form',
             'domain': domain,
             'context': {'create': False},
