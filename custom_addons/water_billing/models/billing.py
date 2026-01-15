@@ -51,6 +51,21 @@ class PayBills(models.Model):
 
     usage = fields.Float(readonly=True)
 
+    start_date = fields.Date(
+        string="Start Date",
+        readonly=True
+    )
+
+    end_date = fields.Date(
+        string="End Date",
+        readonly=True
+    )
+
+    billing_month = fields.Char(
+        string="Billing Month",
+        readonly=True
+    )
+
     current_charges = fields.Float(
         string="Current Charges",
         readonly=True

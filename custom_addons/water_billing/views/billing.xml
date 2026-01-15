@@ -63,6 +63,9 @@
                             <field name="member_id" readonly="1"
                                 style="font-size:20px; font-weight:bold;" />
                             <field name="billing_date" readonly="1" />
+                            <field name="start_date" readonly="1" />
+                            <field name="end_date" readonly="1" />
+                            <field name="billing_month" readonly="1" />
                         </group>
 
                         <group>
