@@ -49,5 +49,10 @@
         action="action_water_usage_analysis"
         sequence="90" />
 
+    <menuitem id="menu_generate_billing_period_wizard"
+        parent="menu_water_billing_root"
+        name="Generate Billing Period"
+        action="action_generate_billing_period_wizard"
+        sequence="100" />
 
 </odoo>

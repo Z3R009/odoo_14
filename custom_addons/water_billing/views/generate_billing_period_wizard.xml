@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_billing_period_wizard_form" model="ir.ui.view">
+        <field name="name">generate.billing.period.wizard.form</field>
+        <field name="model">generate.billing.period.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Select Billing Period">
+                <group>
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </group>
+                <footer>
+                    <button name="action_view_records"
+                        type="object"
+                        string="View Records"
+                        class="btn-primary" />
+                    <button string="Cancel"
+                        class="btn-secondary"
+                        special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

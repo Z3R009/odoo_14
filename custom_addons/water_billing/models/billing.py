@@ -65,7 +65,6 @@ class PayBills(models.Model):
     string="Arrears",
     readonly=True,
     default=0.0,
-    # compute="_compute_arrears"
     )
 
     current_arrears = fields.Float(
@@ -122,7 +121,7 @@ class PayBills(models.Model):
 
             # Mark bill as paid
             rec.write({
-                'arrears': arrears,
+                'current_arrears': rec.current_arrears,
                 'state': 'paid',
                 'payment_date': fields.Date.today(),
             })
