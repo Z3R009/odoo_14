@@ -23,6 +23,23 @@ class PaymentHistory(models.Model):
     previous_reading = fields.Float()
     current_reading = fields.Float()
     usage = fields.Float()
+    
+    start_date = fields.Date(
+        string="Start Date",
+        readonly=True
+    )
+
+    end_date = fields.Date(
+        string="End Date",
+        readonly=True
+    )
+
+    billing_month = fields.Char(
+        string="Billing Month",
+        readonly=True
+    )
+
+
     current_charges = fields.Float(string="Current Charges")
     amount = fields.Float(string="Total Bill")
     payment_amount = fields.Float(string="Amount Paid", store=True)
