@@ -53,19 +53,23 @@ class ReadMeter(models.Model):
         ondelete='cascade'
     )
 
+    start_date = fields.Date(
+        string="Start Date",
+        store=True,
+    )
+
+    end_date = fields.Date(
+        string="End Date",
+        store=True,
+    )
+
     billing_month = fields.Char(
         string="Billing Month",
         readonly=True,
         store=True,
-        help="Month for which the billing is generated, e.g., 2026-01"
+        compute="_compute_billing_month"
     )
 
-    start_date = fields.Date(
-        string="Start Date",
-        store=True,
-        readonly=True,
-        help="Start date of this billing period (last billing date)"
-    )
 
     previous_reading = fields.Float(string="Previous Reading")
 
@@ -73,7 +77,7 @@ class ReadMeter(models.Model):
     string="Current Reading",
     compute="_compute_current_reading",
     store=True
-)
+    )
 
     usage = fields.Float(string="Usage")
 
@@ -269,6 +273,14 @@ class ReadMeter(models.Model):
 
 
 # billing month
+
+    @api.depends('start_date', 'end_date')
+    def _compute_billing_month(self):
+        for rec in self:
+            if rec.start_date and rec.end_date:
+                rec.billing_month = rec.start_date.strftime('%B %Y')
+            else:
+                rec.billing_month = False
 
     # @api.model
     # def create(self, vals):

@@ -50,13 +50,14 @@
                             <field name="member_id" string="Customer Name"
                                 attrs="{'readonly':[('state','=','confirmed')]}" />
                             <field name="billing_datetime" invisible="1" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="billing_month" />
                         </group>
 
                         <group>
                             <field name="previous_reading" readonly="1" />
                             <field name="current_reading" readonly="1" />
-                            <!-- <field name="billing_month" readonly="1" />
-                            <field name="start_date" readonly="1" /> -->
                         </group>
                     </group>
 

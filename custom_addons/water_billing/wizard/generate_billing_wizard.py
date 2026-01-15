@@ -5,8 +5,8 @@ class GenerateBillingWizard(models.TransientModel):
     _name = 'generate.billing.wizard'
     _description = 'Generate Water Billing'
 
-    start_date = fields.Date(string="Start Date", required=True)
-    end_date = fields.Date(string="End Date", required=True)
+    start_date = fields.Date(string="Start Date", store=True, required=True)
+    end_date = fields.Date(string="End Date", store=True, required=True)
 
     def action_generate_billing(self):
         self.ensure_one()
@@ -21,7 +21,9 @@ class GenerateBillingWizard(models.TransientModel):
         for partner in partners:
             self.env['read.meter'].create({
                 'member_id': partner.id,
-                'billing_date': self.end_date, 
+                'start_date': self.start_date,  
+                'end_date': self.end_date,       
+                'billing_date': self.end_date,
                 'usage': 0.0,
             })
 
