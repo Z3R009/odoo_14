@@ -12,7 +12,6 @@
         'data/sequence_data.xml',
         'data/reading_sequence.xml',
         'data/pay_bills_sequence.xml',
-        # 'views/member_views.xml',
         'views/billing.xml',
         'views/read_meter.xml',
         'views/payment_history.xml',
