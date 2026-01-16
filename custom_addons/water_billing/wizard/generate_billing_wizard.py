@@ -23,8 +23,21 @@ class GenerateBillingWizard(models.TransientModel):
             ('is_water_member', '=', True)
         ])
 
+        ReadMeter = self.env['read.meter']
+
         for partner in partners:
-            self.env['read.meter'].create({
+            existing_reading = ReadMeter.search([
+                ('member_id', '=', partner.id),
+                ('start_date', '=', self.start_date),
+                ('end_date', '=', self.end_date),
+            ], limit=1)
+
+# if existing reading is found skip that customer
+            if existing_reading:
+                continue
+            
+
+            ReadMeter.create({
                 'member_id': partner.id,
                 'start_date': self.start_date,  
                 'end_date': self.end_date,           
