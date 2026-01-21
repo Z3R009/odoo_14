@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_financing_assessment_page_others" model="ir.ui.view">
+        <field name="name">financing.assessment.page.others</field>
+        <field name="model">financing.assessment</field>
+        <field name="inherit_id" ref="far.view_financing_assessment_notebook" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Others">
+                    <!-- others fields -->
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

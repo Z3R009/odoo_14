@@ -1,0 +1,7 @@
+<odoo>
+    <record id="action_far" model="ir.actions.act_window">
+        <field name="name">Far</field>
+        <field name="res_model">financing.assessment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

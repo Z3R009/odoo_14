@@ -1,0 +1,11 @@
+<odoo>
+    <record id="view_financing_assessment_form" model="ir.ui.view">
+        <field name="name">financing.assessment.form</field>
+        <field name="model">financing.assessment</field>
+        <field name="arch" type="xml">
+            <form string="Financing Assessment">
+                <sheet />
+            </form>
+        </field>
+    </record>
+</odoo>

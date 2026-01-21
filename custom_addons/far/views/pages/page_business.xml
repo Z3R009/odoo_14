@@ -1,0 +1,25 @@
+<odoo>
+    <record id="view_financing_assessment_page_business" model="ir.ui.view">
+        <field name="name">financing.assessment.page.business</field>
+        <field name="model">financing.assessment</field>
+        <field name="inherit_id" ref="far.view_financing_assessment_notebook" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Business">
+                    <group>
+                        <field name="business_line_ids">
+                            <tree editable="bottom">
+                                <field name="business_type" />
+                                <field name="location" />
+                                <field name="employee_count" />
+                                <field name="cost_of_sales" />
+                                <field name="gross_sales" />
+                                <field name="total_sales" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

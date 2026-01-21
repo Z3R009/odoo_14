@@ -1,0 +1,11 @@
+<odoo>
+    <odoo>
+        <menuitem
+            id="menu_far_root"
+            name="Far - Form"
+            action="action_far"
+            sequence="10" />
+    </odoo>
+
+
+</odoo>
