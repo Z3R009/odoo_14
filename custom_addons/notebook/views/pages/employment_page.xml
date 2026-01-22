@@ -7,7 +7,41 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Employment">
                     <group>
+                        <field name="employment_id">
+                            <tree string="Employment">
+                                <field name="company_name" />
+                                <field name="employment_status" />
+                                <field name="job_title" />
+                                <field name="basic_monthly_salary" />
+                                <field name="mandatory_deduction" />
+                            </tree>
+                        </field>
 
+                        <field name="employment_others_id">
+                            <tree string="Others">
+                                <field name="company_name_o" />
+                                <field name="employment_status_o" />
+                                <field name="job_title_o" />
+                                <field name="basic_monthly_salary_o" />
+                                <field name="mandatory_deduction_o" />
+                            </tree>
+                        </field>
+
+                        <field name="employment_expense_id">
+                            <tree string="Expenses">
+                                <field name="employment_expense_name" />
+                                <field name="employment_expense_amount" />
+                            </tree>
+                        </field>
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="employment_total_gross_income" string="Total Gross Income" />
+                            <field name="employment_total_expenses" string="Total Expenses" />
+                            <field name="employment_total_net_income" string="Total Net Income" />
+                        </group>
+                        <group></group>
                     </group>
                 </page>
             </xpath>

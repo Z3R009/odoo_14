@@ -7,21 +7,23 @@ class Form(models.Model):
 
     name = fields.Char(string="Name")
 
+    # business section
+
     business_id = fields.One2many(
-        comodel_name='business.model',
-        inverse_name='form_id',       
+        comodel_name='business.model',        # the related model
+        inverse_name='business_form_id',      # the Many2one in business.line 
         string='Business'
     )
 
-    others_id = fields.One2many(
+    business_others_id = fields.One2many(
     comodel_name='business.others',
-    inverse_name='form_id',
+    inverse_name='business_form_id',
     string='Others'
     )
 
-    expense_ids = fields.One2many(
+    business_expense_id = fields.One2many(
     comodel_name='business.expense',
-    inverse_name='form_id',
+    inverse_name='business_form_id',
     string='Expense'
     )
 
@@ -29,3 +31,28 @@ class Form(models.Model):
     business_total_gross_income = fields.Float(string="Total Gross Income")
     business_total_expenses = fields.Float(string="Total Expenses")
     business_total_net_income = fields.Float(string="Total Net Income")
+
+
+    # employment section
+
+    employment_id = fields.One2many(
+        comodel_name='employment.model',
+        inverse_name='employment_form_id',       
+        string='Employment'
+    )
+
+    employment_others_id = fields.One2many(
+    comodel_name='employment.others',
+    inverse_name='employment_form_id',
+    string='Others'
+    )
+
+    employment_expense_id = fields.One2many(
+    comodel_name='employment.expense',
+    inverse_name='employment_form_id',
+    string='Expense'
+    )
+
+    employment_total_gross_income = fields.Float(string="Total Gross Income")
+    employment_total_expenses = fields.Float(string="Total Expenses")
+    employment_total_net_income = fields.Float(string="Total Net Income")

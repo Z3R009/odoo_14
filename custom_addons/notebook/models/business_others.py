@@ -3,7 +3,7 @@ from odoo import models, fields
 class BusinessOthers(models.Model):
     _name = 'business.others'
 
-    form_id = fields.Many2one('form.model', string='Form', required=True)
+    business_form_id = fields.Many2one('form.model', string='Form', required=True)
     
     business_type_o = fields.Char(string='Business Type', required=True ) 
 

@@ -5,7 +5,7 @@ class Business(models.Model):
     _name = 'business.model'
     _description = 'Business'
 
-    form_id = fields.Many2one('form.model', string='Form', required=True)  
+    business_form_id = fields.Many2one('form.model', string='Form', required=True)  
     
 
     business_type = fields.Selection([

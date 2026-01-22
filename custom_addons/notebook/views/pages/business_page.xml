@@ -17,7 +17,7 @@
                             </tree>
                         </field>
 
-                        <field name="others_id">
+                        <field name="business_others_id">
                             <tree string="Others">
                                 <field name="business_type_o" />
                                 <field name="business_location_o" />
@@ -27,10 +27,10 @@
                             </tree>
                         </field>
 
-                        <field name="expense_ids">
+                        <field name="business_expense_id">
                             <tree string="Expenses">
-                                <field name="expense_name" />
-                                <field name="expense_amount" />
+                                <field name="business_expense_name" />
+                                <field name="business_expense_amount" />
                             </tree>
                         </field>
                     </group>
