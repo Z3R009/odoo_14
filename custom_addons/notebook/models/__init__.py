@@ -8,3 +8,6 @@ from . import business_others
 from . import employment
 from . import employment_expense
 from . import employment_others
+from . import self_employed
+from . import self_employed_others
+from . import self_employed_expense

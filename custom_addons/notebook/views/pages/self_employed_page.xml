@@ -7,7 +7,41 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Self Employed">
                     <group>
+                        <group>
+                            <field name="self_employed_id">
+                                <tree string="Self-Employed">
+                                    <field name="nature_of_work" />
+                                    <field name="years_of_experience" />
+                                    <field name="average_income" />
+                                </tree>
+                            </field>
 
+                            <field name="self_employed_others_id">
+                                <tree string="Others">
+                                    <field name="nature_of_work_o" />
+                                    <field name="years_of_experience_o" />
+                                    <field name="average_income_o" />
+                                </tree>
+                            </field>
+
+                            <field name="self_employed_expense_id">
+                                <tree string="Expenses">
+                                    <field name="self_employed_expense_name" />
+                                    <field name="self_employed_expense_amount" />
+                                </tree>
+                            </field>
+                        </group>
+
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="self_employed_total_gross_income"
+                                string="Total Gross Income" />
+                            <field name="self_employed_total_expenses" string="Total Expenses" />
+                            <field name="self_employed_total_net_income"
+                                string="Total Net Income" />
+                        </group>
+                        <group></group>
                     </group>
                 </page>
             </xpath>

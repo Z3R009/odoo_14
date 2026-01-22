@@ -56,3 +56,28 @@ class Form(models.Model):
     employment_total_gross_income = fields.Float(string="Total Gross Income")
     employment_total_expenses = fields.Float(string="Total Expenses")
     employment_total_net_income = fields.Float(string="Total Net Income")
+
+
+# self-employed section
+
+    self_employed_id = fields.One2many(
+        comodel_name='self.employed.model',
+        inverse_name='self_employed_form_id',       
+        string='Self Employment'
+    )
+
+    self_employed_others_id = fields.One2many(
+    comodel_name='self.employed.others',
+    inverse_name='self_employed_form_id',
+    string='Others'
+    )
+
+    self_employed_expense_id = fields.One2many(
+    comodel_name='self.employed.expense',
+    inverse_name='self_employed_form_id',
+    string='Expense'
+    )
+
+    self_employed_total_gross_income = fields.Float(string="Total Gross Income")
+    self_employed_total_expenses = fields.Float(string="Total Expenses")
+    self_employed_total_net_income = fields.Float(string="Total Net Income")
