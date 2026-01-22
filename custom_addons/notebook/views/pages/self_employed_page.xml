@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_form_self_employed" model="ir.ui.view">
+        <field name="name">income.form.self_employed</field>
+        <field name="model">form.model</field>
+        <field name="inherit_id" ref="notebook.view_notebook_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Self Employed">
+                    <group>
+
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

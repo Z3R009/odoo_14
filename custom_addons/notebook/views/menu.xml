@@ -1,0 +1,6 @@
+<odoo>
+    <!-- root -->
+    <menuitem id="menu_notebook_root" name="Notebook" action="action_notebook_form" />
+
+
+</odoo>

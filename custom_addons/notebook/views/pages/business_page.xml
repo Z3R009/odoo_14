@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_form_business" model="ir.ui.view">
+        <field name="name">income.form.business</field>
+        <field name="model">form.model</field>
+        <field name="inherit_id" ref="notebook.view_notebook_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Business">
+                    <group>
+                        <field name="business_id">
+                            <tree string="Business">
+                                <field name="business_type" />
+                                <field name="business_location" />
+                                <field name="employee_count" />
+                                <field name="sales_cost" />
+                                <field name="gross_sales" />
+                            </tree>
+                        </field>
+
+                        <field name="others_id">
+                            <tree string="Others">
+                                <field name="business_type_o" />
+                                <field name="business_location_o" />
+                                <field name="employee_count_o" />
+                                <field name="sales_cost_o" />
+                                <field name="gross_sales_o" />
+                            </tree>
+                        </field>
+
+                        <field name="expense_ids">
+                            <tree string="Expenses">
+                                <field name="expense_name" />
+                                <field name="expense_amount" />
+                            </tree>
+                        </field>
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="business_total_gross_income" string="Total Gross Income" />
+                            <field name="business_total_expenses" string="Total Expenses" />
+                            <field name="business_total_net_income" string="Total Net Income" />
+                        </group>
+                        <group></group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
