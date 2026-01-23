@@ -11,3 +11,7 @@ from . import employment_others
 from . import self_employed
 from . import self_employed_others
 from . import self_employed_expense
+from . import farming_crop
+from . import farming_others
+from . import farming_expense
+from . import farming_livestock

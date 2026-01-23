@@ -7,7 +7,63 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Farming">
                     <group>
+                        <field name="farming_crop_id">
+                            <tree string="Crop">
+                                <field name="farming_crop_type" />
+                                <field name="crop_farm_location" />
+                                <field name="crop_weight_per_head" />
+                                <field name="crop_no_of_heads" />
+                                <field name="crop_price" />
+                                <field name="crop_months_to_harvest" />
+                                <field name="crop_avg_monthly_prod" />
+                                <field name="crop_total_amount" />
+                            </tree>
+                        </field>
 
+                        <field name="farming_livestock_id">
+                            <tree string="Livestock">
+                                <field name="farming_livestock_type" />
+                                <field name="livestock_farm_location" />
+                                <field name="livestock_weight_per_head" />
+                                <field name="livestock_no_of_heads" />
+                                <field name="livestock_price" />
+                                <field name="livestock_months_to_harvest" />
+                                <field name="livestock_avg_monthly_prod" />
+                                <field name="livestock_total_amount" />
+                            </tree>
+                        </field>
+
+                        <field name="farming_others_id">
+                            <tree string="Others">
+                                <field name="farming_others" />
+                                <field name="farm_location_o" />
+                                <field name="income" />
+                                <field name="total_harvest_per_year" />
+                                <field name="avg_monthly_prod_o" />
+                                <field name="others_total_amount" />
+                            </tree>
+                        </field>
+
+                        <field name="farming_expense_id">
+                            <tree string="Expenses">
+                                <field name="farming_expense_name" />
+                                <field name="farming_expense_amount" />
+                            </tree>
+                        </field>
+                    </group>
+
+                    <group col="2">
+                        <group>
+                            <field name="farming_total_crop_income" string="Total Crop Income" />
+                            <field name="farming_total_livestock_income"
+                                string="Total Livestock Income" />
+                            <field name="farming_total_others_income" string="Total Others Income" />
+                        </group>
+                        <group>
+                            <field name="farming_total_gross_income" string="Total Gross Income" />
+                            <field name="farming_total_expenses" string="Total Expenses" />
+                            <field name="farming_total_net_income" string="Total Net Income" />
+                        </group>
                     </group>
                 </page>
             </xpath>

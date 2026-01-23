@@ -7,6 +7,43 @@ class Form(models.Model):
 
     name = fields.Char(string="Name")
 
+
+    # farming section
+    farming_crop_id = fields.One2many(
+        comodel_name='farming.crop.model',        # the related model
+        inverse_name='farming_form_id',      # the Many2one in farming.line 
+        string='Crop'
+    )
+
+    farming_livestock_id = fields.One2many(
+        comodel_name='farming.livestock.model',
+        inverse_name='farming_form_id',
+        string='Livestock'
+    )
+
+    farming_others_id = fields.One2many(
+    comodel_name='farming.others',
+    inverse_name='farming_form_id',
+    string='Others'
+    )
+
+    farming_expense_id = fields.One2many(
+    comodel_name='farming.expense',
+    inverse_name='farming_form_id',
+    string='Expense'
+    )
+
+    farming_total_crop_income = fields.Float(string="Total Crop Income")
+    farming_total_livestock_income = fields.Float(string="Total Livestock Income")
+    farming_total_others_income = fields.Float(string="Total Others Income")
+
+    farming_total_gross_income = fields.Float(string="Total Gross Income")
+    farming_total_expenses = fields.Float(string="Total Expenses")
+    farming_total_net_income = fields.Float(string="Total Net Income")
+
+
+
+
     # business section
 
     business_id = fields.One2many(

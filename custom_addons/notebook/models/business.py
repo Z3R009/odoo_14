@@ -13,6 +13,7 @@ class Business(models.Model):
         ('sari_sari_store', 'Sari - Sari Store'),
         ('services', 'Services'),
     ], string='Business Type', required=True ) 
+    
     business_location = fields.Char(string="Business Location")
 
     employee_count = fields.Integer(string="Number of Employees")
