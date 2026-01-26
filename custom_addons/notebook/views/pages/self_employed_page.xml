@@ -36,10 +36,11 @@
                     <group col="2">
                         <group>
                             <field name="self_employed_total_gross_income"
-                                string="Total Gross Income" />
-                            <field name="self_employed_total_expenses" string="Total Expenses" />
+                                string="Total Gross Income" readonly="1" />
+                            <field name="self_employed_total_expenses" string="Total Expenses"
+                                readonly="1" />
                             <field name="self_employed_total_net_income"
-                                string="Total Net Income" />
+                                string="Total Net Income" readonly="1" />
                         </group>
                         <group></group>
                     </group>

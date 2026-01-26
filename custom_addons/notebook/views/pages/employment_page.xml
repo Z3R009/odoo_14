@@ -37,9 +37,12 @@
 
                     <group col="2">
                         <group>
-                            <field name="employment_total_gross_income" string="Total Gross Income" />
-                            <field name="employment_total_expenses" string="Total Expenses" />
-                            <field name="employment_total_net_income" string="Total Net Income" />
+                            <field name="employment_total_gross_income" string="Total Gross Income"
+                                readonly="1" />
+                            <field name="employment_total_expenses" string="Total Expenses"
+                                readonly="1" />
+                            <field name="employment_total_net_income" string="Total Net Income"
+                                readonly="1" />
                         </group>
                         <group></group>
                     </group>

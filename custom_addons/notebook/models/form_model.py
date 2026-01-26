@@ -1,18 +1,24 @@
 
-from odoo import models, fields
+from odoo import api, models, fields
 
 class Form(models.Model):
     _name = 'form.model'
     _description = 'Form'
 
-    name = fields.Char(string="Name")
+    partner_id = fields.Many2one(
+    'res.partner',
+    string='Name',
+    required=True
+    )
+
 
 
     # farming section
     farming_crop_id = fields.One2many(
         comodel_name='farming.crop.model',        # the related model
         inverse_name='farming_form_id',      # the Many2one in farming.line 
-        string='Crop'
+        string='Crop',
+        ondelete='cascade'
     )
 
     farming_livestock_id = fields.One2many(
@@ -49,7 +55,8 @@ class Form(models.Model):
     business_id = fields.One2many(
         comodel_name='business.model',        # the related model
         inverse_name='business_form_id',      # the Many2one in business.line 
-        string='Business'
+        string='Business',
+        ondelete='cascade'
     )
 
     business_others_id = fields.One2many(
@@ -65,7 +72,10 @@ class Form(models.Model):
     )
 
 
-    business_total_gross_income = fields.Float(string="Total Gross Income")
+    business_total_gross_income = fields.Float(
+        string="Total Gross Income"
+
+    )
     business_total_expenses = fields.Float(string="Total Expenses")
     business_total_net_income = fields.Float(string="Total Net Income")
 
@@ -75,7 +85,8 @@ class Form(models.Model):
     employment_id = fields.One2many(
         comodel_name='employment.model',
         inverse_name='employment_form_id',       
-        string='Employment'
+        string='Employment',
+        ondelete='cascade'
     )
 
     employment_others_id = fields.One2many(
@@ -100,7 +111,8 @@ class Form(models.Model):
     self_employed_id = fields.One2many(
         comodel_name='self.employed.model',
         inverse_name='self_employed_form_id',       
-        string='Self Employment'
+        string='Self Employment',
+        ondelete='cascade'
     )
 
     self_employed_others_id = fields.One2many(
@@ -118,3 +130,14 @@ class Form(models.Model):
     self_employed_total_gross_income = fields.Float(string="Total Gross Income")
     self_employed_total_expenses = fields.Float(string="Total Expenses")
     self_employed_total_net_income = fields.Float(string="Total Net Income")
+
+
+
+    #business calculations
+
+    @api.depends('business_id.gross_sales')
+    def _compute_business_total_gross_income(self):
+        for record in self:
+            record.business_total_gross_income = sum(
+                record.business_id.mapped('gross_sales')
+            )

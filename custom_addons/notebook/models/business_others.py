@@ -11,6 +11,8 @@ class BusinessOthers(models.Model):
 
     employee_count_o = fields.Integer(string="Number of Employees")
 
+    sales_o = fields.Float(string="Sales")
+
     sales_cost_o = fields.Float(string="Cost of Sales")
 
     gross_sales_o = fields.Float(string="Gross Sales")

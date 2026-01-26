@@ -12,9 +12,21 @@
                                 <field name="business_type" />
                                 <field name="business_location" />
                                 <field name="employee_count" />
+                                <field name="sales" />
                                 <field name="sales_cost" />
                                 <field name="gross_sales" />
                             </tree>
+                            <form>
+                                <group>
+                                    <field name="business_form_id" invisible="1" />
+                                    <field name="business_type" />
+                                    <field name="business_location" />
+                                    <field name="employee_count" />
+                                    <field name="sales" />
+                                    <field name="sales_cost" />
+                                    <field name="gross_sales" readonly="1" />
+                                </group>
+                            </form>
                         </field>
 
                         <field name="business_others_id">
@@ -22,6 +34,7 @@
                                 <field name="business_type_o" />
                                 <field name="business_location_o" />
                                 <field name="employee_count_o" />
+                                <field name="sales_o" />
                                 <field name="sales_cost_o" />
                                 <field name="gross_sales_o" />
                             </tree>
@@ -37,9 +50,12 @@
 
                     <group col="2">
                         <group>
-                            <field name="business_total_gross_income" string="Total Gross Income" />
-                            <field name="business_total_expenses" string="Total Expenses" />
-                            <field name="business_total_net_income" string="Total Net Income" />
+                            <field name="business_total_gross_income" string="Total Gross Income"
+                                readonly="1" />
+                            <field name="business_total_expenses" string="Total Expenses"
+                                readonly="1" />
+                            <field name="business_total_net_income" string="Total Net Income"
+                                readonly="1" />
                         </group>
                         <group></group>
                     </group>

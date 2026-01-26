@@ -54,15 +54,20 @@
 
                     <group col="2">
                         <group>
-                            <field name="farming_total_crop_income" string="Total Crop Income" />
+                            <field name="farming_total_crop_income" string="Total Crop Income"
+                                readonly="1" />
                             <field name="farming_total_livestock_income"
-                                string="Total Livestock Income" />
-                            <field name="farming_total_others_income" string="Total Others Income" />
+                                string="Total Livestock Income" readonly="1" />
+                            <field name="farming_total_others_income" string="Total Others Income"
+                                readonly="1" />
                         </group>
                         <group>
-                            <field name="farming_total_gross_income" string="Total Gross Income" />
-                            <field name="farming_total_expenses" string="Total Expenses" />
-                            <field name="farming_total_net_income" string="Total Net Income" />
+                            <field name="farming_total_gross_income" string="Total Gross Income"
+                                readonly="1" />
+                            <field name="farming_total_expenses" string="Total Expenses"
+                                readonly="1" />
+                            <field name="farming_total_net_income" string="Total Net Income"
+                                readonly="1" />
                         </group>
                     </group>
                 </page>
