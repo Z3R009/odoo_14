@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, models, fields
 
 class BusinessOthers(models.Model):
     _name = 'business.others'
@@ -15,4 +15,12 @@ class BusinessOthers(models.Model):
 
     sales_cost_o = fields.Float(string="Cost of Sales")
 
-    gross_sales_o = fields.Float(string="Gross Sales")
+    gross_sales_o = fields.Float(
+        string="Gross Sales",
+        compute = 'compute_gross_income',
+        )
+
+    @api.depends('sales_o', 'sales_cost_o')
+    def compute_gross_income(self):
+        for record in self:
+            record.gross_sales_o = record.sales_o - record.sales_cost_o 

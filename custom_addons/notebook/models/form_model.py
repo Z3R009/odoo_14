@@ -71,12 +71,26 @@ class Form(models.Model):
     string='Expense'
     )
 
+    business_total_income = fields.Float(
+        string="Total Income",
+        compute='_compute_business_total_income',
+    )
+
+    business_total_others_income = fields.Float(
+        string="Total Others Income",
+        compute='_compute_business_total_others_income',
+    )
+
 
     business_total_gross_income = fields.Float(
-        string="Total Gross Income"
-
+        string="Total Gross Income",
     )
-    business_total_expenses = fields.Float(string="Total Expenses")
+
+    business_total_expenses = fields.Float(
+        string="Total Expenses",
+        compute='_compute_business_total_expenses',
+        )
+    
     business_total_net_income = fields.Float(string="Total Net Income")
 
 
@@ -135,9 +149,27 @@ class Form(models.Model):
 
     #business calculations
 
+    # business income calculation
     @api.depends('business_id.gross_sales')
-    def _compute_business_total_gross_income(self):
+    def _compute_business_total_income(self):
         for record in self:
-            record.business_total_gross_income = sum(
+            record.business_total_income = sum(
                 record.business_id.mapped('gross_sales')
+            )
+
+    #business others income calculation
+    @api.depends('business_others_id.gross_sales_o')
+    def _compute_business_total_others_income(self):
+        for record in self:
+            record.business_total_others_income = sum(
+                record.business_others_id.mapped('gross_sales_o')
+            )
+
+
+    #business expense calculation
+    @api.depends('business_expense_id.business_expense_amount')
+    def _compute_business_total_expenses(self):
+        for record in self:
+            record.business_total_expenses = sum(
+                record.business_expense_id.mapped('business_expense_amount')
             )
