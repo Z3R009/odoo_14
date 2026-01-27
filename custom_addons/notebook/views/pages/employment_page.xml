@@ -15,7 +15,19 @@
                                 <field name="basic_monthly_salary" />
                                 <field name="mandatory_deduction" />
                             </tree>
+                            <form>
+                                <group>
+                                    <field name="employment_form_id" invisible="1" />
+                                    <field name="company_name" />
+                                    <field name="employment_status" />
+                                    <field name="job_title" />
+                                    <field name="basic_monthly_salary" />
+                                    <field name="mandatory_deduction" />
+                                </group>
+                            </form>
                         </field>
+
+                        <field name="employment_total_income" string="Total Income" readonly="1" />
 
                         <field name="employment_others_id">
                             <tree string="Others">
@@ -25,14 +37,39 @@
                                 <field name="basic_monthly_salary_o" />
                                 <field name="mandatory_deduction_o" />
                             </tree>
+                            <form>
+                                <group>
+                                    <field name="employment_form_id" invisible="1" />
+                                    <field name="company_name_o" />
+                                    <field name="employment_status_o" />
+                                    <field name="job_title_o" />
+                                    <field name="basic_monthly_salary_o" />
+                                    <field name="mandatory_deduction_o" />
+                                </group>
+                            </form>
                         </field>
+
+                        <field name="employment_total_others_income" string="Total Others Income"
+                            readonly="1" />
 
                         <field name="employment_expense_id">
                             <tree string="Expenses">
                                 <field name="employment_expense_name" />
                                 <field name="employment_expense_amount" />
                             </tree>
+                            <form>
+                                <group>
+                                    <field name="employment_form_id" invisible="1" />
+                                    <field name="employment_expense_name" />
+                                    <field name="employment_expense_amount" />
+                                </group>
+                            </form>
                         </field>
+
+                        <field name="employment_total_expenses"
+                            string="Total Expenses"
+                            readonly="1" />
+
                     </group>
 
                     <group col="2">
