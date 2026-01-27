@@ -14,7 +14,19 @@
                                     <field name="years_of_experience" />
                                     <field name="average_income" />
                                 </tree>
+                                <form>
+                                    <group>
+                                        <field name="self_employed_form_id" invisible="1" />
+                                        <field name="nature_of_work" />
+                                        <field name="years_of_experience" />
+                                        <field name="average_income" />
+                                    </group>
+                                </form>
                             </field>
+
+                            <field name="self_employed_total_average_income"
+                                string="Total Average Income"
+                                readonly="1" />
 
                             <field name="self_employed_others_id">
                                 <tree string="Others">
@@ -22,14 +34,36 @@
                                     <field name="years_of_experience_o" />
                                     <field name="average_income_o" />
                                 </tree>
+                                <form>
+                                    <group>
+                                        <field name="self_employed_form_id" invisible="1" />
+                                        <field name="nature_of_work_o" />
+                                        <field name="years_of_experience_o" />
+                                        <field name="average_income_o" />
+                                    </group>
+                                </form>
                             </field>
+
+                            <field name="self_employed_total_others_average_income"
+                                string="Total Others Average Income"
+                                readonly="1" />
 
                             <field name="self_employed_expense_id">
                                 <tree string="Expenses">
                                     <field name="self_employed_expense_name" />
                                     <field name="self_employed_expense_amount" />
                                 </tree>
+                                <form>
+                                    <group>
+                                        <field name="self_employed_form_id" invisible="1" />
+                                        <field name="self_employed_expense_name" />
+                                        <field name="self_employed_expense_amount" />
+                                    </group>
+                                </form>
                             </field>
+
+                            <field name="self_employed_total_expenses" string="Total Expenses"
+                                readonly="1" />
                         </group>
 
                     </group>

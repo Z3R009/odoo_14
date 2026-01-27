@@ -176,13 +176,44 @@ class Form(models.Model):
     string='Expense'
     )
 
-    self_employed_total_gross_income = fields.Float(string="Total Gross Income")
-    self_employed_total_expenses = fields.Float(string="Total Expenses")
-    self_employed_total_net_income = fields.Float(string="Total Net Income")
+    self_employed_total_average_income = fields.Float(
+        string="Total Average Income",
+        compute='_compute_self_employed_average_income',
+        store=True,
+    )
+
+    self_employed_total_others_average_income = fields.Float(
+        string="Total Others Average Income",
+        compute='_compute_self_employed_total_others_income',
+        store=True,
+    )
+
+    self_employed_total_gross_income = fields.Float(
+        string="Total Gross Income",
+        compute='_compute_self_employed_total_gross_income',
+        store=True,
+    )
+    self_employed_total_expenses = fields.Float(
+        string="Total Expenses",
+        compute='_compute_self_employed_total_expenses',
+        store=True,
+    )
+
+    self_employed_total_net_income = fields.Float(
+        string="Total Net Income",
+        compute='_compute_self_employed_totals',
+        store=True,
+    )
+
+
+#-------------------------------------------------------------------------
+# CALCULATIONS
+#-------------------------------------------------------------------------
+
 
 
     #-------------------------------------------------------------------------
-    #business calculations
+    # BUSINESS CALCULATIONS
     #-------------------------------------------------------------------------
 
 
@@ -196,7 +227,9 @@ class Form(models.Model):
                 record.business_id.mapped('gross_sales')
             )
 
+    #-------------------------------------------------------------------------
     #business others income calculation
+    #-------------------------------------------------------------------------
     @api.depends('business_others_id.gross_sales_o')
     def _compute_business_total_others_income(self):
         for record in self:
@@ -205,7 +238,9 @@ class Form(models.Model):
             )
 
 
+    #-------------------------------------------------------------------------
     #business expense calculation
+    #-------------------------------------------------------------------------
     @api.depends('business_expense_id.business_expense_amount')
     def _compute_business_total_expenses(self):
         for record in self:
@@ -213,7 +248,9 @@ class Form(models.Model):
                 record.business_expense_id.mapped('business_expense_amount')
             )
 
+    #-------------------------------------------------------------------------
     # business income and others total
+    #-------------------------------------------------------------------------
     @api.depends('business_total_income', 'business_total_others_income')
     def _compute_business_total_gross_income(self):
         for record in self:
@@ -222,6 +259,9 @@ class Form(models.Model):
                 record.business_total_others_income
             )
 
+    #-------------------------------------------------------------------------
+    # business totals
+    #-------------------------------------------------------------------------
     @api.depends(
     'business_total_income',
     'business_total_others_income',
@@ -239,8 +279,10 @@ class Form(models.Model):
                 gross_income - record.business_total_expenses
             )
 
+
+
     #-------------------------------------------------------------------------
-    # employment calculations
+    # EMPLOYMENT CALCULATIONS
     #-------------------------------------------------------------------------
 
 
@@ -255,7 +297,9 @@ class Form(models.Model):
             )
 
 
+    #-------------------------------------------------------------------------
     # employment others income calculation
+    #-------------------------------------------------------------------------
     @api.depends('employment_others_id.basic_monthly_salary_o')
     def _compute_employment_total_others_income(self):
         for record in self:
@@ -264,7 +308,9 @@ class Form(models.Model):
             )
 
 
+    #-------------------------------------------------------------------------
     # employment expense calculation
+    #-------------------------------------------------------------------------
     @api.depends('employment_expense_id.employment_expense_amount')
     def _compute_employment_total_expenses(self):
         for record in self:
@@ -272,7 +318,9 @@ class Form(models.Model):
                 record.employment_expense_id.mapped('employment_expense_amount')
             )
 
+    #-------------------------------------------------------------------------
     # employment income and others total
+    #-------------------------------------------------------------------------
     @api.depends('employment_total_income', 'employment_total_others_income')
     def _compute_employment_total_gross_income(self):
         for record in self:
@@ -281,6 +329,9 @@ class Form(models.Model):
                 record.employment_total_others_income
             )
 
+    #-------------------------------------------------------------------------
+    # employment totals
+    #-------------------------------------------------------------------------
     @api.depends(
     'employment_total_income',
     'employment_total_others_income',
@@ -297,8 +348,71 @@ class Form(models.Model):
             record.employment_total_net_income = (
                 gross_income - record.employment_total_expenses
             )
+
+    #-------------------------------------------------------------------------
+    # SELF-EMPLOYED CALCULATIONS
+    #-------------------------------------------------------------------------
+
+
+    #-------------------------------------------------------------------------
+    # self-employed income calculation
+    #-------------------------------------------------------------------------
+    @api.depends('self_employed_id.average_income')
+    def _compute_self_employed_average_income(self):
         for record in self:
-            record.business_total_gross_income = (
-                record.employment_total_net_income +
-                record.business_total_others_income
+            record.self_employed_total_average_income = sum(
+                record.self_employed_id.mapped('average_income')
+            )
+
+
+    #-------------------------------------------------------------------------
+    # self-employed others income calculation
+    #-------------------------------------------------------------------------
+    @api.depends('self_employed_others_id.average_income_o')
+    def _compute_self_employed_total_others_income(self):
+        for record in self:
+            record.self_employed_total_others_average_income = sum(
+                record.self_employed_others_id.mapped('average_income_o')
+            )
+
+
+    #-------------------------------------------------------------------------
+    # self-employed expense calculation
+    #-------------------------------------------------------------------------
+    @api.depends('self_employed_expense_id.self_employed_expense_amount')
+    def _compute_self_employed_total_expenses(self):
+        for record in self:
+            record.self_employed_total_expenses = sum(
+                record.self_employed_expense_id.mapped('self_employed_expense_amount')
+            )
+
+    #-------------------------------------------------------------------------
+    # self-employed income and others total
+    #-------------------------------------------------------------------------
+    @api.depends('self_employed_total_average_income', 'self_employed_total_others_average_income')
+    def _compute_self_employed_total_gross_income(self):
+        for record in self:
+            record.self_employed_total_gross_income = (
+                record.self_employed_total_average_income +
+                record.self_employed_total_others_average_income
+            )
+
+    #-------------------------------------------------------------------------
+    # self-employed totals
+    #-------------------------------------------------------------------------
+    @api.depends(
+    'self_employed_total_average_income',
+    'self_employed_total_others_average_income',
+    'self_employed_total_expenses'
+    )
+    def _compute_self_employed_totals(self):
+        for record in self:
+            gross_income = (
+                record.self_employed_total_average_income +
+                record.self_employed_total_others_average_income
+            )
+
+            record.self_employed_total_gross_income = gross_income
+            record.self_employed_total_net_income = (
+                gross_income - record.self_employed_total_expenses
             )
