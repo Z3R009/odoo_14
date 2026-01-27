@@ -12,8 +12,9 @@ class Form(models.Model):
     )
 
 
-
+    #-------------------------------------------------------------------------
     # farming section
+    #-------------------------------------------------------------------------
     farming_crop_id = fields.One2many(
         comodel_name='farming.crop.model',        # the related model
         inverse_name='farming_form_id',      # the Many2one in farming.line 
@@ -49,9 +50,9 @@ class Form(models.Model):
 
 
 
-
+    #-------------------------------------------------------------------------
     # business section
-
+    #-------------------------------------------------------------------------
     business_id = fields.One2many(
         comodel_name='business.model',        # the related model
         inverse_name='business_form_id',      # the Many2one in business.line 
@@ -101,9 +102,9 @@ class Form(models.Model):
         compute='_compute_business_totals',
     )
 
-
+    #-------------------------------------------------------------------------
     # employment section
-
+    #-------------------------------------------------------------------------
     employment_id = fields.One2many(
         comodel_name='employment.model',
         inverse_name='employment_form_id',       
@@ -153,9 +154,9 @@ class Form(models.Model):
         store=True,
     )
 
-
-# self-employed section
-
+    #-------------------------------------------------------------------------
+    # self-employed section
+    #-------------------------------------------------------------------------
     self_employed_id = fields.One2many(
         comodel_name='self.employed.model',
         inverse_name='self_employed_form_id',       
@@ -180,10 +181,14 @@ class Form(models.Model):
     self_employed_total_net_income = fields.Float(string="Total Net Income")
 
 
-
+    #-------------------------------------------------------------------------
     #business calculations
+    #-------------------------------------------------------------------------
 
+
+    #-------------------------------------------------------------------------
     # business income calculation
+    #-------------------------------------------------------------------------
     @api.depends('business_id.gross_sales')
     def _compute_business_total_income(self):
         for record in self:
@@ -234,10 +239,14 @@ class Form(models.Model):
                 gross_income - record.business_total_expenses
             )
 
-
+    #-------------------------------------------------------------------------
     # employment calculations
+    #-------------------------------------------------------------------------
 
+
+    #-------------------------------------------------------------------------
     # employment income calculation
+    #-------------------------------------------------------------------------
     @api.depends('employment_id.basic_monthly_salary')
     def _compute_employment_total_income(self):
         for record in self:
