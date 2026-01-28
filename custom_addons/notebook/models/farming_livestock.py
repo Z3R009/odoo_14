@@ -1,5 +1,5 @@
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 class FarmingLivestock(models.Model):
     _name = 'farming.livestock.model'
@@ -28,7 +28,23 @@ class FarmingLivestock(models.Model):
 
     livestock_avg_monthly_prod = fields.Float(string="Average Monthly Production")
 
-    livestock_total_amount = fields.Float(string="Price/Kilo")
+    livestock_total_amount = fields.Float(
+        string="Total Amount",
+        compute='_compute_livestock_total_amount',
+        store=True)
 
 
+
+    @api.depends('livestock_no_of_heads', 'livestock_weight_per_head', 'livestock_price', 'livestock_months_to_harvest')
+    def _compute_livestock_total_amount(self):
+        for record in self:
+            if record.livestock_months_to_harvest:  # avoid division by zero
+                record.livestock_total_amount = (
+                    (record.livestock_no_of_heads or 0)
+                    * (record.livestock_weight_per_head or 0)
+                    * (record.livestock_price or 0)
+                    / record.livestock_months_to_harvest
+                )
+            else:
+                record.livestock_total_amount = 0
 

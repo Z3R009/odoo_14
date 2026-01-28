@@ -1,5 +1,5 @@
 
-from odoo import models, fields
+from odoo import api, models, fields
 
 class FarmingCrop(models.Model):
     _name = 'farming.crop.model'
@@ -21,9 +21,9 @@ class FarmingCrop(models.Model):
 
     crop_farm_location = fields.Char(string="Farm Area Location")
 
-    crop_weight_per_head = fields.Integer(string="Weight per Head (in Kgs)")
+    volume = fields.Integer(string="Volume")
 
-    crop_no_of_heads = fields.Float(string="Number of Heads")
+    kg_per_sack = fields.Float(string="Kg per Sack")
 
     crop_price = fields.Float(string="Price/Kilo")
 
@@ -31,7 +31,23 @@ class FarmingCrop(models.Model):
 
     crop_avg_monthly_prod = fields.Float(string="Average Monthly Production")
 
-    crop_total_amount = fields.Float(string="Price/Kilo")
+    crop_total_amount = fields.Float(
+        string="Total Amount",
+        compute='_compute_total_amount',
+        store=True)
+
+
+    @api.depends('volume', 'kg_per_sack', 'crop_price')
+    def _compute_total_amount(self):
+        for record in self:
+            if record.volume and record.kg_per_sack and record.crop_price:
+                record.crop_total_amount = (
+                    record.volume
+                    * record.kg_per_sack
+                    * record.crop_price
+                )
+            else:
+                record.crop_total_amount = 0
 
 
 

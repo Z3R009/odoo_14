@@ -40,6 +40,20 @@ class Form(models.Model):
     string='Expense'
     )
 
+    farming_total_crop_amount = fields.Float(
+        string="Total Crop Amount",
+        compute='_compute_farming_total_crop_amount',
+        store=True
+    )
+
+    farming_total_livestock_amount = fields.Float(
+        string="Total Livestock Amount",
+        compute='_compute_farming_total_livestock_amount',
+        store=True
+    )
+
+    farming_total_others_amount = fields.Float(string="Total Others Amount")
+
     farming_total_crop_income = fields.Float(string="Total Crop Income")
     farming_total_livestock_income = fields.Float(string="Total Livestock Income")
     farming_total_others_income = fields.Float(string="Total Others Income")
@@ -211,6 +225,31 @@ class Form(models.Model):
 #-------------------------------------------------------------------------
 
 
+
+    #-------------------------------------------------------------------------
+    # FARMING CALCULATIONS
+    #-------------------------------------------------------------------------
+
+
+    #-------------------------------------------------------------------------
+    # farming crop amount calculation
+    #-------------------------------------------------------------------------
+    @api.depends('farming_crop_id.crop_total_amount')
+    def _compute_farming_total_crop_amount(self):
+        for record in self:
+            record.farming_total_crop_amount = sum(
+                record.farming_crop_id.mapped('crop_total_amount')
+            )
+
+    #-------------------------------------------------------------------------
+    # farming livestock amount calculation
+    #-------------------------------------------------------------------------
+    @api.depends('farming_livestock_id.livestock_total_amount')
+    def _compute_farming_total_livestock_amount(self):
+        for record in self:
+            record.farming_total_livestock_amount = sum(
+                record.farming_livestock_id.mapped('livestock_total_amount')
+            )
 
     #-------------------------------------------------------------------------
     # BUSINESS CALCULATIONS

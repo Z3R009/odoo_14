@@ -18,7 +18,7 @@ class FarmingOthers(models.Model):
 
     avg_monthly_prod_o = fields.Float(string="Average Monthly Production")
 
-    others_total_amount = fields.Float(string="Price/Kilo")
+    others_total_amount = fields.Float(string="Total Amount")
 
 
 
