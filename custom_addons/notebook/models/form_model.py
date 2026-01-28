@@ -52,15 +52,46 @@ class Form(models.Model):
         store=True
     )
 
-    farming_total_others_amount = fields.Float(string="Total Others Amount")
+    farming_total_others_amount = fields.Float(
+        string="Total Others Amount",
+        compute='_compute_farming_total_others_amount',
+        store=True
+        )
 
-    farming_total_crop_income = fields.Float(string="Total Crop Income")
-    farming_total_livestock_income = fields.Float(string="Total Livestock Income")
-    farming_total_others_income = fields.Float(string="Total Others Income")
+    farming_total_crop_income = fields.Float(
+        string="Total Crop Income",
+        compute='_compute_farming_total_crop_amount',
+        store=True
+    )
 
-    farming_total_gross_income = fields.Float(string="Total Gross Income")
-    farming_total_expenses = fields.Float(string="Total Expenses")
-    farming_total_net_income = fields.Float(string="Total Net Income")
+    farming_total_livestock_income = fields.Float(
+        string="Total Livestock Income",
+        compute='_compute_farming_total_livestock_amount',
+        store=True
+    )
+
+    farming_total_others_income = fields.Float(
+        string="Total Others Income",
+        compute='_compute_farming_total_others_amount',
+        store=True)
+
+    farming_total_gross_income = fields.Float(
+        string="Total Gross Income",
+        compute='_compute_farming_total_gross_income',
+        store=True
+    )
+
+    farming_total_expenses = fields.Float(
+        string="Total Expenses",
+        compute='_compute_farming_total_expenses',
+        store=True
+        )
+    
+    farming_total_net_income = fields.Float(
+        string="Total Net Income",
+        compute='_compute_farming_total_net_income',
+        store=True
+    )
 
 
 
@@ -100,8 +131,8 @@ class Form(models.Model):
 
     business_total_gross_income = fields.Float(
         string="Total Gross Income",
-        store=True,
         compute='_compute_business_total_gross_income',
+        store=True,
     )
 
     business_total_expenses = fields.Float(
@@ -237,9 +268,10 @@ class Form(models.Model):
     @api.depends('farming_crop_id.crop_total_amount')
     def _compute_farming_total_crop_amount(self):
         for record in self:
-            record.farming_total_crop_amount = sum(
-                record.farming_crop_id.mapped('crop_total_amount')
-            )
+            total = sum(record.farming_crop_id.mapped('crop_total_amount'))
+            record.farming_total_crop_amount = total
+            record.farming_total_crop_income = total
+
 
     #-------------------------------------------------------------------------
     # farming livestock amount calculation
@@ -247,9 +279,65 @@ class Form(models.Model):
     @api.depends('farming_livestock_id.livestock_total_amount')
     def _compute_farming_total_livestock_amount(self):
         for record in self:
-            record.farming_total_livestock_amount = sum(
-                record.farming_livestock_id.mapped('livestock_total_amount')
+            total = sum(record.farming_livestock_id.mapped('livestock_total_amount'))
+            record.farming_total_livestock_amount = total
+            record.farming_total_livestock_income = total
+
+    #-------------------------------------------------------------------------
+    # farming others amount calculation
+    #-------------------------------------------------------------------------
+    @api.depends('farming_others_id.others_total_amount')
+    def _compute_farming_total_others_amount(self):
+        for record in self:
+            total = sum(record.farming_others_id.mapped('others_total_amount'))
+            record.farming_total_others_amount = total
+            record.farming_total_others_income = total
+
+    #-------------------------------------------------------------------------
+    # farming expense calculation
+    #-------------------------------------------------------------------------
+    @api.depends('farming_expense_id.farming_expense_amount')
+    def _compute_farming_total_expenses(self):
+        for record in self:
+            record.farming_total_expenses = sum(
+                record.farming_expense_id.mapped('farming_expense_amount')
             )
+    
+    #-------------------------------------------------------------------------
+    # farming gross amount calculation
+    #-------------------------------------------------------------------------
+    @api.depends(
+    'farming_total_crop_amount',
+    'farming_total_livestock_amount',
+    'farming_total_others_amount'
+    )
+    def _compute_farming_total_gross_income(self):
+        for record in self:
+            record.farming_total_gross_income = (
+                record.farming_total_crop_amount +
+                record.farming_total_livestock_amount +
+                record.farming_total_others_amount
+            )
+
+    #-------------------------------------------------------------------------
+    # farming net amount calculation
+    #-------------------------------------------------------------------------
+    @api.depends(
+        'farming_total_crop_amount',
+        'farming_total_livestock_amount',
+        'farming_total_others_amount',
+        'farming_total_expenses'
+    )
+    def _compute_farming_total_net_income(self):
+        for record in self:
+            gross_income = (
+                record.farming_total_crop_amount +
+                record.farming_total_livestock_amount +
+                record.farming_total_others_amount
+            )
+            record.farming_total_net_income = gross_income - record.farming_total_expenses
+
+
 
     #-------------------------------------------------------------------------
     # BUSINESS CALCULATIONS

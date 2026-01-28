@@ -85,7 +85,7 @@
                             </form>
                         </field>
 
-                        <field name="farming_total_others_amount" />
+                        <field name="farming_total_others_amount" readonly="1" />
 
                         <field name="farming_expense_id">
                             <tree string="Expenses">
