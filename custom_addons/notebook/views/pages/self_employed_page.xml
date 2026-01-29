@@ -24,9 +24,14 @@
                                 </form>
                             </field>
 
-                            <field name="self_employed_total_average_income"
-                                string="Total Average Income"
-                                readonly="1" />
+
+                            <group colspan="4">
+                                <div class="full-width-highlight o_right_align">
+                                    <field name="self_employed_total_average_income"
+                                        string="Total Average Income"
+                                        readonly="1" />
+                                </div>
+                            </group>
 
                             <field name="self_employed_others_id">
                                 <tree string="Others">
@@ -44,9 +49,14 @@
                                 </form>
                             </field>
 
-                            <field name="self_employed_total_others_average_income"
-                                string="Total Others Average Income"
-                                readonly="1" />
+
+                            <group colspan="4">
+                                <div class="full-width-highlight o_right_align">
+                                    <field name="self_employed_total_others_average_income"
+                                        string="Total Others Average Income"
+                                        readonly="1" />
+                                </div>
+                            </group>
 
                             <field name="self_employed_expense_id">
                                 <tree string="Expenses">
@@ -62,8 +72,14 @@
                                 </form>
                             </field>
 
-                            <field name="self_employed_total_expenses" string="Total Expenses"
-                                readonly="1" />
+
+                            <group colspan="4">
+                                <div class="full-width-highlight o_right_align">
+                                    <field name="self_employed_total_expenses"
+                                        string="Total Expenses"
+                                        readonly="1" />
+                                </div>
+                            </group>
                         </group>
 
                     </group>

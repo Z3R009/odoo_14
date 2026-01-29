@@ -30,3 +30,11 @@
     margin-bottom: 10px;
     /* optional spacing below */
 }
+
+/* move value to the right */
+.o_right_align .o_field_widget,
+.o_right_align span.o_field_float,
+.o_right_align span.o_field_char {
+    text-align: right;
+    display: block;
+}

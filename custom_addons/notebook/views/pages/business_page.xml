@@ -29,10 +29,15 @@
                             </form>
                         </field>
 
+                        <group colspan="4">
+                            <div class="full-width-highlight o_right_align">
+                                <field
+                                    name="business_total_income"
+                                    string="Total Income"
+                                    readonly="1" />
+                            </div>
+                        </group>
 
-                        <field name="business_total_income"
-                            string="Total Income"
-                            readonly="1" />
 
                         <field name="business_others_id">
                             <tree string="Others">
@@ -56,10 +61,14 @@
                             </form>
                         </field>
 
-
-                        <field name="business_total_others_income"
-                            string="Total Others Income"
-                            readonly="1" />
+                        <group colspan="4">
+                            <div class="full-width-highlight o_right_align">
+                                <field
+                                    name="business_total_others_income"
+                                    string="Total Others Income"
+                                    readonly="1" />
+                            </div>
+                        </group>
 
                         <field name="business_expense_id">
                             <tree string="Expenses">
@@ -75,10 +84,15 @@
                             </form>
                         </field>
 
+                        <group colspan="4">
+                            <div class="full-width-highlight o_right_align">
+                                <field
+                                    name="business_total_expenses"
+                                    string="Total Expenses"
+                                    readonly="1" />
+                            </div>
+                        </group>
 
-                        <field name="business_total_expenses"
-                            string="Total Expenses"
-                            readonly="1" />
                     </group>
 
                     <group col="2">
