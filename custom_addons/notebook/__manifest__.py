@@ -22,6 +22,7 @@
     # always loaded
     'data': [
         'views/main_form.xml',
+        'views/assets.xml',
         'views/pages/farming_page.xml',
         'views/pages/business_page.xml',
         'views/pages/employment_page.xml',

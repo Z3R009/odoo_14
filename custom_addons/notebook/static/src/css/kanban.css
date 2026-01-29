@@ -1,0 +1,32 @@
+.kv_row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 13px;
+}
+
+.kv_label {
+    width: 45%;
+    font-weight: 600;
+    padding-right: 8px;
+}
+
+.kv_value {
+    width: 55%;
+    padding-left: 8px;
+    border-left: 1px solid #dcdcdc;
+}
+
+.full-width-highlight {
+    background-color: #d2d2ff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: block;
+    /* ensures it stretches across the container */
+    width: 100%;
+    /* take full width of the form group */
+    box-sizing: border-box;
+    /* includes padding in width calculation */
+    margin-bottom: 10px;
+    /* optional spacing below */
+}

@@ -7,17 +7,55 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Farming">
                     <group>
-                        <field name="farming_crop_id">
-                            <tree string="Crop">
+
+                        <group colspan="4">
+                            <div class="full-width-highlight"> Crop
+                            </div>
+                        </group>
+                        <field
+                            name="farming_crop_id">
+                            <kanban class="o_kanban_small_column">
                                 <field name="farming_crop_type" />
                                 <field name="crop_farm_location" />
                                 <field name="volume" />
-                                <field name="kg_per_sack" />
-                                <field name="crop_price" />
-                                <field name="crop_months_to_harvest" />
-                                <field name="crop_avg_monthly_prod" />
                                 <field name="crop_total_amount" />
-                            </tree>
+
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_card oe_kanban_global_click">
+                                            <div class="o_kanban_header">
+                                                <strong>
+                                                    <field name="farming_crop_type" />
+                                                </strong>
+                                            </div>
+
+                                            <div class="o_kanban_content">
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Farm Location</span>
+                                                    <span class="kv_value">
+                                                        <field name="crop_farm_location" />
+                                                    </span>
+                                                </div>
+
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Volume</span>
+                                                    <span class="kv_value">
+                                                        <field name="volume" />
+                                                    </span>
+                                                </div>
+
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Total Amount</span>
+                                                    <span class="kv_value">
+                                                        <field name="crop_total_amount" />
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
                             <form>
                                 <group>
                                     <field name="farming_form_id" invisible="1" />
@@ -33,10 +71,20 @@
                             </form>
                         </field>
 
-                        <field name="farming_total_crop_amount" />
+                        <group>
+                            <field
+                                name="farming_total_crop_amount" readonly="1" />
+                        </group>
 
-                        <field name="farming_livestock_id">
-                            <tree string="Livestock">
+                        <group colspan="4">
+                            <div class="full-width-highlight"> Livestock
+                            </div>
+                        </group>
+
+
+                        <field
+                            name="farming_livestock_id">
+                            <kanban class="o_kanban_small_column">
                                 <field name="farming_livestock_type" />
                                 <field name="livestock_farm_location" />
                                 <field name="livestock_weight_per_head" />
@@ -45,7 +93,72 @@
                                 <field name="livestock_months_to_harvest" />
                                 <field name="livestock_avg_monthly_prod" />
                                 <field name="livestock_total_amount" />
-                            </tree>
+
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_card oe_kanban_global_click">
+                                            <div class="o_kanban_header">
+                                                <strong>
+                                                    <field name="farming_livestock_type" />
+                                                </strong>
+                                            </div>
+
+                                            <div class="o_kanban_content">
+
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Farm Location</span>
+                                                    <span class="kv_value">
+                                                        <field name="livestock_farm_location" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Weight per Head:</span>
+                                                    <span class="kv_value">
+                                                        <field
+                                                            name="livestock_weight_per_head" />
+                                                    </span>
+
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">No. of Heads:</span>
+                                                    <span class="kv_value">
+                                                        <field
+                                                            name="livestock_no_of_heads" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Price:</span>
+                                                    <span class="kv_value">
+                                                        <field name="livestock_price" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Months to Harvest:</span>
+                                                    <span class="kv_value">
+                                                        <field
+                                                            name="livestock_months_to_harvest" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Average Monthly
+                                                        Production:</span>
+                                                    <span class="kv_value">
+                                                        <field
+                                                            name="livestock_avg_monthly_prod" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Total Amount:</span>
+                                                    <span class="kv_value">
+                                                        <field
+                                                            name="livestock_total_amount" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
                             <form>
                                 <group>
                                     <field name="farming_form_id" invisible="1" />
@@ -61,17 +174,70 @@
                             </form>
                         </field>
 
-                        <field name="farming_total_livestock_amount" />
+                        <group>
+                            <field
+                                name="farming_total_livestock_amount" readonly="1" />
+                        </group>
+
+                        <group colspan="4">
+                            <div class="full-width-highlight"> Others
+                            </div>
+                        </group>
 
                         <field name="farming_others_id">
-                            <tree string="Others">
+                            <kanban class="o_kanban_small_column">
                                 <field name="farming_others" />
                                 <field name="farm_location_o" />
                                 <field name="income" />
                                 <field name="total_harvest_per_year" />
                                 <field name="avg_monthly_prod_o" />
                                 <field name="others_total_amount" />
-                            </tree>
+
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_card oe_kanban_global_click">
+                                            <div class="o_kanban_header">
+                                                <strong>
+                                                    <field name="farming_others" />
+                                                </strong>
+                                            </div>
+
+                                            <div class="o_kanban_content">
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Farm Location:</span>
+                                                    <span class="kv_value">
+                                                        <field name="farm_location_o" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Income:</span>
+                                                    <span class="kv_value">
+                                                        <field name="income" />
+                                                    </span>
+                                                </div>
+                                                <div class="kv_row">
+                                                    <span class="kv_label">Total Harvest per Year:</span>
+                                                    <span class="kv_value">
+                                                        <field name="total_harvest_per_year" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="kv_row">
+                                                <span class="kv_label">Average Monthly Production:</span>
+                                                <span class="kv_value">
+                                                    <field name="avg_monthly_prod_o" />
+                                                </span>
+                                            </div>
+                                            <div class="kv_row">
+                                                <span class="kv_label">Total Amount:</span>
+                                                <span class="kv_value">
+                                                    <field name="others_total_amount" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
                             <form>
                                 <group>
                                     <field name="farming_form_id" invisible="1" />
@@ -85,9 +251,18 @@
                             </form>
                         </field>
 
-                        <field name="farming_total_others_amount" readonly="1" />
+                        <group>
+                            <field
+                                name="farming_total_others_amount" readonly="1" />
+                        </group>
 
-                        <field name="farming_expense_id">
+                        <group colspan="4">
+                            <div class="full-width-highlight"> Expenses
+                            </div>
+                        </group>
+
+                        <field
+                            name="farming_expense_id">
                             <tree string="Expenses">
                                 <field name="farming_expense_name" />
                                 <field name="farming_expense_amount" />
@@ -101,9 +276,10 @@
                             </form>
                         </field>
 
-                        <field name="farming_total_expenses"
-                            string="Total Expenses"
-                            readonly="1" />
+                        <group>
+                            <field
+                                name="farming_total_expenses" readonly="1" />
+                        </group>
 
                     </group>
 
