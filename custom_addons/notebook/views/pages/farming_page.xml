@@ -160,16 +160,29 @@
                                 </templates>
                             </kanban>
                             <form>
-                                <group>
-                                    <field name="farming_form_id" invisible="1" />
-                                    <field name="farming_livestock_type" />
-                                    <field name="livestock_farm_location" />
-                                    <field name="livestock_weight_per_head" />
-                                    <field name="livestock_no_of_heads" />
-                                    <field name="livestock_price" />
-                                    <field name="livestock_months_to_harvest" />
-                                    <field name="livestock_avg_monthly_prod" />
-                                    <field name="livestock_total_amount" />
+                                <group col="2">
+                                    <group>
+                                        <field name="farming_form_id" invisible="1" />
+                                        <field name="farming_livestock_type" string="Livestock Type" />
+                                        <field name="livestock_farm_location" string="Farm Location" />
+                                        <field name="livestock_weight_per_head"
+                                            string="Weight per Head (kg)" />
+
+                                        <field name="livestock_price" string="Price per Head" />
+                                        <field name="livestock_months_to_harvest"
+                                            string="Months to Harvest" />
+                                        <field name="livestock_avg_monthly_prod"
+                                            string="Average Monthly Production" />
+                                        <field name="livestock_total_amount" string="Total Amount" />
+                                    </group>
+                                    <group
+                                        attrs="{'invisible': [('farming_livestock_type', 'not in', ['piggery', 'poultry'])]}">
+                                        <field name="livestock_no_of_heads" string="Number of Heads" />
+                                    </group>
+                                    <!-- <group
+                                        attrs="{'invisible': [('farming_livestock_type', 'not in', ['piggery', 'poultry', 'fish_pond'])]}">
+                                        <field name="price_per_egg" string="Price per Eggs" />
+                                    </group> -->
                                 </group>
                             </form>
                         </field>
